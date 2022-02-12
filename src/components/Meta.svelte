@@ -1,7 +1,7 @@
 <script>
-  export let title = "Title TK";
-  export let description = "Description TK";
-  export let url = "https://pudding.cool";
+  export let title = "WRRCE";
+  export let description = "Description";
+  export let url = "https://google.com";
   export let keywords = "";
   export let preloadFont = [];
 </script>
@@ -26,7 +26,7 @@
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="https://pudding.cool" />
-  <meta name="twitter:creator" content="@puddingviz" />
+  <meta name="twitter:creator" content="@jeffmacinnes" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image:src" content="{url}/assets/social-twitter.jpg" />
