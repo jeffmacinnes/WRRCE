@@ -1,0 +1,33 @@
+{
+  "name": "wrrce",
+  "private": true,
+  "version": "1.0.0",
+  "description": "This [starter template](https://github.com/the-pudding/svelte-starter) aims to quickly scaffold a [SvelteKit](https://kit.svelte.dev/) project, designed around data-driven, visual stories at [The Pudding](https://pudding.cool)",
+  "main": "package.json",
+  "author": "Jeff MacInnes <jeff.macinnes@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "sanity start",
+    "build": "sanity build"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/base": "^2.27.0",
+    "@sanity/core": "^2.27.0",
+    "@sanity/default-layout": "^2.27.0",
+    "@sanity/default-login": "^2.27.0",
+    "@sanity/desk-tool": "^2.27.0",
+    "@sanity/vision": "^2.27.0",
+    "prop-types": "^15.7",
+    "react": "^17.0",
+    "react-dom": "^17.0",
+    "styled-components": "^5.2.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jeffmacinnes/WRRCE.git"
+  }
+}
