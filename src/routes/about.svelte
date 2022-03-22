@@ -16,8 +16,10 @@
   console.log("results", results);
 </script>
 
-<h1>This is a test of the sanity connection</h1>
+<div class="page">
+  <h1>About</h1>
 
-{#each results as item}
-  <div>My favorite movie is {item.title}</div>
-{/each}
+  {#each results as item}
+    <div>My favorite movie is {item.title}</div>
+  {/each}
+</div>

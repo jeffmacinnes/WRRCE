@@ -6,4 +6,10 @@
 </footer>
 
 <style>
+  footer {
+    position: relative;
+    bottom: 0;
+    height: 250px;
+    background-color: var(--color-c4);
+  }
 </style>

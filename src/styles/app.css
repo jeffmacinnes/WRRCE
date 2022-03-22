@@ -4,31 +4,95 @@
 @import "reset.css";
 
 /* colors defined in variables.css */
-:root {
-	/* font */
-	--sans: "National 2 Web", Helvetica, Arial, sans-serif;
-	--serif: "Tiempos Text Web", Georgia, Times, serif;
-	--mono: Menlo, Consolas, Monaco, "Courier New", monospace;
-	
-	/* z-index */
-	--z-bottom: -100;
-  --z-middle: 0;
-  --z-top: 100;
-	--z-overlay: 1000;
 
-	/* presets */
-	--border-radius: 4px;
-	--font-body: var(--serif);
-	--font-form: var(--sans);
-	--color-bg: var(--color-white);
-	--color-fg: var(--color-gray-900);
-	--color-placeholder: var(--color-700);
+:root {
+  /* Defaults, ignore this section */
+  /* vars */
+  --sans: Helvetica, Arial, sans-serif;
+  --serif: Georgia, Times, serif;
+  --mono: "Courier New", monospace;
+
+  /* presets */
+  --border-radius: 4px;
+  --font-body: var(--serif);
+  --font-form: var(--sans);
+  --color-bg: var(--color-white);
+  --color-fg: var(--color-gray-900);
+  --color-placeholder: var(--color-700);
   --color-link: var(--color-purple);
   --color-focus: var(--color-red);
   --color-form-bg: var(--color-gray-700);
-	--color-form-fg: var(--color-gray-900);
-	--color-border: var(--color-gray-300);
-	--color-selection: var(--color-gray-300);
+  --color-form-fg: var(--color-gray-900);
+  --color-border: var(--color-gray-300);
+  --color-selection: var(--color-gray-300);
   --color-highlight: var(--color-yellow);
-	
+}
+
+/* Site specific  */
+body {
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  letter-spacing: 0.005em;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 48.83px;
+  line-height: 59px;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 39.06px;
+  line-height: 107.19%;
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 31.25px;
+  line-height: 38px;
+}
+
+h4 {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+h5 {
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.005em;
+}
+
+.body-lg {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+}
+
+.body-rg {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.body-sm {
+  font-weight: 400;
+  font-size: 12.8px;
+  line-height: 133%;
+}
+
+.shadow {
+  box-shadow: -1px 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+a {
+  text-decoration: none;
+}
+
+.page {
+  height: 100vh;
 }
