@@ -1,9 +1,6 @@
 <script context="module">
   // Pass the key of the current path for the transitions
-  export const load = async ({ url }) => {
-    console.log("here", url);
-    return { props: { url } };
-  };
+  export const load = async ({ url }) => ({ props: { url } });
 </script>
 
 <script>
