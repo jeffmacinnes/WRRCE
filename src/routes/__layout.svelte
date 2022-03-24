@@ -11,13 +11,26 @@
 
   export let url;
 
-  $: console.log("layout url: ", url);
+  let w;
 </script>
 
-<main id="content">
+<main id="content" bind:clientWidth={w}>
   <Navigation />
+  <div class="bg" style:width={`${w}px`} style:height={`${w}px`} />
   <PageTransition {url}>
     <slot />
     <Footer />
   </PageTransition>
 </main>
+
+<style>
+  .bg {
+    position: fixed;
+    top: 0;
+    left: -50%;
+    border-radius: 50%;
+    background-color: var(--color-a1);
+    opacity: 15%;
+    z-index: -1;
+  }
+</style>

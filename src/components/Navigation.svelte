@@ -9,19 +9,29 @@
 </script>
 
 <nav>
-  <div class="logo-container" />
+  <div class="nav-container">
+    <div class="logo-container" />
 
-  <div class="links-container">
-    {#each links as link}
-      <a class="link" class:active={$page.url.pathname === link.path} href={link.path}
-        >{link.title}</a
-      >
-    {/each}
+    <div class="links-container">
+      {#each links as link}
+        <a class="link" class:active={$page.url.pathname === link.path} href={link.path}
+          >{link.title}</a
+        >
+      {/each}
+    </div>
   </div>
 </nav>
 
 <style lang="scss">
   nav {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    width: 100%;
+  }
+
+  .nav-container {
+    position: relative;
     max-width: 1600px;
     height: 100px;
     border-bottom: solid 1px var(--color-c4);

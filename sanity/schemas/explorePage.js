@@ -1,14 +1,14 @@
 export default {
-  title: "Landing Page",
-  name: "landing",
+  title: "Explore Page",
+  name: "explorePage", // needs to match documentID in siteStructure.js
   type: "document",
-  description: "Text for the landing page",
+  __experimental_actions: ["create", "update", /*'delete',*/ "publish"],
   fields: [
     {
       title: "Page",
       name: "page",
       type: "string",
-      initialValue: "Landing Page",
+      initialValue: "Explore Page Content",
       readOnly: true
     },
     {
@@ -17,8 +17,8 @@ export default {
       type: "string"
     },
     {
-      title: "Summary",
-      name: "summary",
+      title: "Body",
+      name: "body",
       type: "text"
     }
   ]
