@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
 import adapterStatic from "@sveltejs/adapter-static";
-import svg from "vite-plugin-svgstring";
+// import svg from "vite-plugin-svgstring";
+import svg from "@poppanator/sveltekit-svg";
 import dsv from "@rollup/plugin-dsv";
 import sveltePreprocess from "svelte-preprocess";
 import autoprefixer from "autoprefixer";
@@ -26,6 +27,7 @@ const config = {
       resolve: {
         alias: {
           $actions: path.resolve("./src/actions"),
+          $assets: path.resolve("./src/assets"),
           $components: path.resolve("./src/components"),
           $data: path.resolve("./src/data"),
           $stores: path.resolve("./src/stores"),

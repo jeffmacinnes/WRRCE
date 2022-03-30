@@ -26,10 +26,13 @@
 <style>
   .bg {
     position: fixed;
+    max-width: 1200px;
+    max-height: 1200px;
     top: 0;
-    left: -50%;
+    left: 50%;
     border-radius: 50%;
     background-color: var(--color-a1);
+    transform: translate(-100%);
     opacity: 15%;
     z-index: -1;
   }

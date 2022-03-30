@@ -7,8 +7,6 @@ helpful links:
 import { IoBrowsers } from "react-icons/io5";
 import S from "@sanity/desk-tool/structure-builder";
 
-S.documentTypeListItems().map((d) => console.log(d));
-
 export default () =>
   S.list()
     .title("WRRCE Site Content")

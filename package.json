@@ -2,9 +2,9 @@
   "name": "svelte-starter",
   "version": "3.0.9",
   "scripts": {
-    "data": "node tasks/prepData.js",
-    "gdoc": "node tasks/fetch-google.js",
-    "style": "node tasks/style-dictionary.js",
+    "data": "node scripts/prepData.js",
+    "gdoc": "node scripts/fetch-google.js",
+    "style": "node scripts/style-dictionary.js",
     "dev": "svelte-kit dev --port 8000",
     "build": "svelte-kit build",
     "start": "svelte-kit start",
@@ -12,6 +12,7 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
+    "@poppanator/sveltekit-svg": "^0.3.1",
     "@rollup/plugin-dsv": "^2.0.3",
     "@sanity/client": "^3.0.6",
     "@sveltejs/adapter-static": "1.0.0-next.26",

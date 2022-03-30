@@ -1,5 +1,6 @@
 <script>
   import { page } from "$app/stores";
+  import Logo from "$assets/WRRCE_logo.svg";
 
   const links = [
     { title: "Explore", path: "/" },
@@ -10,7 +11,9 @@
 
 <nav>
   <div class="nav-container">
-    <div class="logo-container" />
+    <div class="logo-container">
+      <Logo />
+    </div>
 
     <div class="links-container">
       {#each links as link}
@@ -28,6 +31,7 @@
     top: 0;
     background-color: white;
     width: 100%;
+    z-index: 100;
   }
 
   .nav-container {
@@ -38,14 +42,13 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin: 0 80px;
-    padding-bottom: 10px;
+    margin: 0 auto;
+    padding: 0px 40px 10px;
   }
 
   .logo-container {
     width: 250px;
     height: 75px;
-    background-color: var(--color-c4);
   }
 
   .links-container {
