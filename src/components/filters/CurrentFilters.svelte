@@ -14,6 +14,7 @@
         )}</b> out of <b>${$rawData.length.toLocaleString(
           "en-US"
         )}</b> total recommendations, filtered by:`;
+  $: filterToggleText = $showFilters ? "Hide filters" : "Select filters";
 </script>
 
 <div class="container shadow">
@@ -21,7 +22,7 @@
     <div class="filters-toggle-container">
       <CTA
         icon="sliders"
-        text="select filters"
+        text={filterToggleText}
         textClass="filters-cta"
         iconFirst={true}
         iconSize="1.3em"

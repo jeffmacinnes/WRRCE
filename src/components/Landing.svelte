@@ -1,5 +1,7 @@
 <script>
   import CTA from "$components/common/CTA.svelte";
+  import LogoAnimation from "$components/LogoAnimation.svelte";
+
   import { color } from "$data/variables.json";
 
   export let copy;
@@ -20,7 +22,7 @@
   </div>
 
   <div class="animation-container">
-    <h2>animation</h2>
+    <LogoAnimation />
   </div>
 
   {#each links as link, i}

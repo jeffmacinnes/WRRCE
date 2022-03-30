@@ -16,11 +16,10 @@
   .filters-container {
     position: absolute;
     width: 300px;
-    height: 100%;
+    height: calc(100vh - 150px);
     top: 0;
     left: 0;
     border-right: 1px solid black;
     background-color: var(--color-white);
-    z-index: -1;
   }
 </style>

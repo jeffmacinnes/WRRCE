@@ -3,24 +3,24 @@
   import Filters from "$components/filters/Filters.svelte";
   import CurrentVisualization from "$components/visualizations/CurrentVisualization.svelte";
   import Table from "$components/table/Table.svelte";
-
-  let bgHeight;
 </script>
 
 <section class="explore-container">
-  <div class="fg" style:height={`${bgHeight}px`}>
+  <div class="fg">
     <CurrentFilters />
-    <Filters height={bgHeight} />
   </div>
 
-  <div class="bg" bind:clientHeight={bgHeight}>
+  <div class="bg">
+    <div class="filter-panel">
+      <Filters />
+    </div>
+
     <div class="visualization-container">
       <h1>VISUALIZATIONS GO HERE</h1>
-      <!-- <CurrentVisualization /> -->
     </div>
 
     <div class="table-container">
-      <!-- <Table /> -->
+      <h1>TABLE GOES HERE</h1>
     </div>
   </div>
 </section>
@@ -40,15 +40,17 @@
     position: sticky;
     top: 100px;
     z-index: 10;
-    border: solid 1px red;
   }
 
   .bg {
     position: relative;
-    //top: 0;
     width: 100%;
-    top: calc(-100vh + 150px);
     height: 100%;
+  }
+
+  .filter-panel {
+    position: sticky;
+    top: 150px;
   }
 
   .visualization-container {
@@ -61,7 +63,9 @@
 
   .table-container {
     height: 900px;
-    position: relative;
     background-color: coral;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>
