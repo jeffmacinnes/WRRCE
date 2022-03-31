@@ -1,5 +1,5 @@
 {
-  "name": "svelte-starter",
+  "name": "WRRCE",
   "version": "3.0.9",
   "scripts": {
     "data": "node scripts/prepData.js",
@@ -42,9 +42,6 @@
     "node": ">= 16.13.0"
   },
   "browserslist": "> 0.5%, last 4 versions, not ie <= 11, not ie_mob <= 11",
-  "svelteStarter": {
-    "subdirectory": "svelte-starter"
-  },
   "dependencies": {
     "@portabletext/svelte": "^0.2.0"
   }
