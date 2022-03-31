@@ -34,6 +34,7 @@ body {
   font-style: normal;
   letter-spacing: 0.005em;
   color: var(--color-c4);
+  box-sizing: content-box;
 }
 
 h1 {
@@ -90,6 +91,12 @@ p:last-of-type {
   line-height: 150%;
 }
 
+.body-lg-link {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 133%;
+}
+
 .body-rg {
   font-weight: 400;
   font-size: 16px;
@@ -110,10 +117,6 @@ p:last-of-type {
 
 .shadow {
   box-shadow: -1px 4px 16px rgba(0, 0, 0, 0.2);
-}
-
-.page {
-  min-height: 100vh;
 }
 
 .col-12 {

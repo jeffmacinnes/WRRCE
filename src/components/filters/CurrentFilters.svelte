@@ -27,7 +27,6 @@
         iconFirst={true}
         iconSize="1.3em"
         rotation="90"
-        fontSize="12.8px"
         lineSize="1px"
         onClick={toggleFiltersPanel}
       />
@@ -43,7 +42,6 @@
         text="download filtered"
         textClass="filters-cta"
         iconSize="1.3em"
-        fontSize="12.8px"
         lineSize="1px"
       />
     </div>

@@ -4,7 +4,6 @@
   export let icon = "anchor";
   export let color = "#000000";
   export let text = "Click here";
-  export let fontSize = "1em";
   export let iconSize = "1.8em";
   export let iconFirst = false;
   export let rotation = 0;
@@ -18,12 +17,7 @@
 <div class="cta-container" on:click={onClick}>
   <Icon name={icon} width={iconSize} height={iconSize} {rotation} />
   <div class="spacer" />
-  <div
-    class={`text-container ${textClass}`}
-    style:font-size={fontSize}
-    style:--color={color}
-    style:--line-size={lineSize}
-  >
+  <div class={`text-container ${textClass}`} style:--color={color} style:--line-size={lineSize}>
     {text}
   </div>
 </div>

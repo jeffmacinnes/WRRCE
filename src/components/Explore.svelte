@@ -1,6 +1,6 @@
 <script>
   import CurrentFilters from "$components/filters/CurrentFilters.svelte";
-  import Filters from "$components/filters/Filters.svelte";
+  import FiltersPanel from "$components/filters/FiltersPanel.svelte";
   import CurrentVisualization from "$components/visualizations/CurrentVisualization.svelte";
   import Table from "$components/table/Table.svelte";
 </script>
@@ -12,7 +12,7 @@
 
   <div class="bg">
     <div class="filter-panel">
-      <Filters />
+      <FiltersPanel />
     </div>
 
     <div class="visualization-container">
@@ -55,7 +55,7 @@
 
   .visualization-container {
     height: 900px;
-    background-color: aquamarine;
+    background-color: var(--color-c1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +63,7 @@
 
   .table-container {
     height: 900px;
-    background-color: coral;
+    background-color: var(--color-c2);
     display: flex;
     justify-content: center;
     align-items: center;

@@ -2,7 +2,7 @@
 </script>
 
 <footer>
-  <h1>THIS IS THE FOOTER</h1>
+  <h1>FOOTER</h1>
 </footer>
 
 <style>
@@ -10,6 +10,10 @@
     position: relative;
     bottom: 0;
     height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-c1);
     background-color: var(--color-c4);
   }
 </style>

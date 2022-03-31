@@ -1,8 +1,9 @@
 <script>
+  import { goto } from "$app/navigation";
+  import { color } from "$data/variables.json";
+
   import CTA from "$components/common/CTA.svelte";
   import LogoAnimation from "$components/LogoAnimation.svelte";
-
-  import { color } from "$data/variables.json";
 
   export let copy;
   let { heading, body, links } = copy;
@@ -12,13 +13,7 @@
   <div class="text-container">
     <h2>{heading}</h2>
     <p class="body-lg">{@html body}</p>
-    <CTA
-      icon="download"
-      text="Download Dataset"
-      fontSize="18px"
-      iconFirst={true}
-      color={color.c4}
-    />
+    <CTA icon="download" text="Download Dataset" iconFirst={true} color={color.c4} />
   </div>
 
   <div class="animation-container">
@@ -32,9 +27,9 @@
       <CTA
         icon="arrow-right"
         text={link.linkText}
-        fontSize="16px"
         iconFirst={false}
         color={color.white}
+        onClick={() => goto(`/${link.linkTo.toLowerCase()}`)}
       />
     </div>
   {/each}
@@ -57,7 +52,6 @@
   .animation-container {
     grid-column: 10 / span 2;
     grid-row: 1;
-    background-color: var(--color-a1);
   }
 
   .link {

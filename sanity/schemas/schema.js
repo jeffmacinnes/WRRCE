@@ -5,11 +5,12 @@ import createSchema from "part:@sanity/base/schema-creator";
 import schemaTypes from "all:part:@sanity/base/schema-type";
 
 // We import object and document schemas
-import landingPage from "./landingPage";
-import explorePage from "./explorePage";
 import aboutPage from "./aboutPage";
+import explorePage from "./explorePage";
+import findingsPage from "./findingsPage";
+import landingPage from "./landingPage";
 
-import post from "./post";
+import finding from "./finding";
 import linkBox from "./linkBox";
 import researchPapers from "./researchPapers";
 import tooltips from "./tooltips";
@@ -23,9 +24,11 @@ export default createSchema({
   types: schemaTypes.concat([
     researchPapers,
     tooltips,
-    landingPage,
-    explorePage,
     aboutPage,
-    linkBox
+    explorePage,
+    findingsPage,
+    landingPage,
+    linkBox,
+    finding
   ])
 });

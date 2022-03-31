@@ -23,8 +23,13 @@ export default () =>
         .title("About Page")
         .icon(IoBrowsers)
         .child(S.document().schemaType("aboutPage").documentId("aboutPage")),
+      S.listItem()
+        .title("Findings Page")
+        .icon(IoBrowsers)
+        .child(S.document().schemaType("findingsPage").documentId("findingsPage")),
       S.divider(),
       ...S.documentTypeListItems().filter(
-        (item) => !["landingPage", "explorePage", "aboutPage"].includes(item.getId())
+        (item) =>
+          !["landingPage", "explorePage", "aboutPage", "findingsPage"].includes(item.getId())
       )
     ]);

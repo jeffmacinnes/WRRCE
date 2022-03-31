@@ -1,5 +1,7 @@
 <script>
   import { page } from "$app/stores";
+  import { goto } from "$app/navigation";
+
   import Logo from "$assets/WRRCE_logo.svg";
 
   const links = [
@@ -11,7 +13,7 @@
 
 <nav>
   <div class="nav-container">
-    <div class="logo-container">
+    <div class="logo-container" on:click={() => goto("/")}>
       <Logo />
     </div>
 
@@ -49,6 +51,7 @@
   .logo-container {
     width: 250px;
     height: 75px;
+    cursor: pointer;
   }
 
   .links-container {
