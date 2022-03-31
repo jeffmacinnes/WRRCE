@@ -1,6 +1,6 @@
 <script context="module">
   // Pass the key of the current path for the transitions
-  export const load = async ({ url }) => ({ props: { url } });
+  // export const load = async ({ url }) => ({ props: { url } });
 </script>
 
 <script>
@@ -17,10 +17,10 @@
 <main id="content" bind:clientWidth={w}>
   <Navigation />
   <div class="bg" style:width={`${w}px`} style:height={`${w}px`} />
-  <PageTransition {url}>
-    <slot />
-    <Footer />
-  </PageTransition>
+  <!-- <PageTransition {url}> -->
+  <slot />
+  <Footer />
+  <!-- </PageTransition> -->
 </main>
 
 <style>
