@@ -39,7 +39,7 @@
   <div transition:slide={{ duration: 300 }} class="panel">
     {#each opts as opt}
       <div
-        class="checkbox-container"
+        class="checkbox-container body-rg"
         class:checked={opt.isSelected}
         on:click={() => onOptUpdate(name, opt, !opt.isSelected)}
       >
@@ -74,10 +74,18 @@
     text-transform: uppercase;
     color: var(--color-g1);
 
+    &:hover {
+      opacity: 0.6;
+    }
+
     &.active {
       background-color: var(--color-c1);
       font-weight: 800;
       color: var(--color-c4);
+
+      &:hover {
+        opacity: 1;
+      }
     }
 
     cursor: pointer;
@@ -94,16 +102,18 @@
   .checkbox-container {
     display: block;
     position: relative;
-    margin: 2px;
+    margin: 7px 2px;
     padding-left: 25px;
+    line-height: 1.33;
     cursor: pointer;
+    // border: solid 1px red;
 
     &:hover {
       opacity: 0.6;
 
-      // .checkmark {
-      //   background-color: var(--color-c1);
-      // }
+      .checkmark {
+        background-color: var(--color-c1);
+      }
     }
 
     // custom checkbox
@@ -113,6 +123,7 @@
       left: 0;
       height: 15px;
       width: 15px;
+      border-radius: 50%;
       border: solid 1px var(--color-g1);
       background-color: var(--color-white);
     }

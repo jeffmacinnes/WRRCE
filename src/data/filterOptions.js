@@ -11,19 +11,31 @@ export const filterOptions = [
     display: "Institution",
     opts: [
       {
-        opt: "CEDAW",
+        name: "CEDAW",
         display: "Committee on the Elimination of Discrimination Against Women (CEDAW)"
       },
-      { opt: "UPR", display: "Universal Periodic Review (UPR)" },
-      { opt: "ECtHR", display: "European Court of Human Rights (ECtHR)" }
+      { name: "UPR", display: "Universal Periodic Review (UPR)" },
+      { name: "ECtHR", display: "European Court of Human Rights (ECtHR)" }
     ]
   },
   {
     name: "issue",
     display: "Issue",
     opts: [
-      { opt: "vaw", display: "Violence Against Women" },
-      { opt: "econ", display: "Economic Discrimination Against Women" }
+      { name: "vaw", display: "Violence Against Women" },
+      { name: "econ", display: "Economic Discrimination Against Women" }
+    ]
+  },
+  {
+    name: "complianceStatus",
+    display: "Compliance Status",
+    opts: [
+      { name: "nomention", display: "No Mention" },
+      { name: "inaction", display: "Inaction" },
+      { name: "consideration", display: "Consideration" },
+      { name: "delegation", display: "Delegation" },
+      { name: "execution", display: "Execution" },
+      { name: "compliance", display: "Compliance" }
     ]
   }
 ].map((d) => ({ ...d, isOpen: false, opts: d.opts.map((opt) => ({ ...opt, isSelected: false })) }));
