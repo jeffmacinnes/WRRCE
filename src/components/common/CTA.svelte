@@ -14,7 +14,7 @@
   let iconLast = !iconFirst;
 </script>
 
-<div class="cta-container" on:click={onClick}>
+<div class="cta-container" class:iconLast on:click={onClick}>
   <Icon name={icon} width={iconSize} height={iconSize} {rotation} />
   <div class="spacer" />
   <div class={`text-container ${textClass}`} style:--color={color} style:--line-size={lineSize}>

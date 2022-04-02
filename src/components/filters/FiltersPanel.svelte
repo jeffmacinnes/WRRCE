@@ -134,7 +134,8 @@
   }
 
   .filters-container {
-    margin: 30px 0;
+    margin: 15px 0;
+    margin-bottom: 20px;
   }
 
   .keyword-container {

@@ -43,6 +43,7 @@
         textClass="filters-cta"
         iconSize="1.3em"
         lineSize="1px"
+        iconFirst={false}
       />
     </div>
   </div>

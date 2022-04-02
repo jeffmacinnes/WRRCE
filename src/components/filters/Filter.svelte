@@ -64,6 +64,7 @@
     align-items: center;
     justify-content: space-between;
     margin: 2px 0px;
+    padding-left: 5px;
     border-radius: 0;
 
     font-weight: 500;
@@ -99,6 +100,10 @@
 
     &:hover {
       opacity: 0.6;
+
+      // .checkmark {
+      //   background-color: var(--color-c1);
+      // }
     }
 
     // custom checkbox
