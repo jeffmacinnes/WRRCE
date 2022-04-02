@@ -9,7 +9,7 @@
   import Navigation from "$components/Navigation.svelte";
   import PageTransition from "$components/helpers/PageTransition.svelte";
 
-  export let url;
+  // export let url;
 
   let w;
 </script>

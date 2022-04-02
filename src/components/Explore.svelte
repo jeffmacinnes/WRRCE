@@ -51,6 +51,7 @@
   .filter-panel {
     position: sticky;
     top: 150px;
+    overscroll-behavior: contain;
   }
 
   .visualization-container {

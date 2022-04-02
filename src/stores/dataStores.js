@@ -1,14 +1,42 @@
 import { derived, writable } from "svelte/store";
 import siteData from "$data/siteData.csv";
+import { filterOptions } from "$data/filterOptions";
 
 export const showFilters = writable(true);
 export const searchKeyword = writable("");
-export const filters = writable([]);
+export const filterOpts = writable(filterOptions);
 export const rawData = writable(siteData);
+
+export const activeFilters = derived(
+  // set active filters array based on current searchterm and filter opts
+  [searchKeyword, filterOpts],
+  ([$searchKeyword, $filterOpts]) => {
+    let filters = [];
+
+    // get the current search term
+    if ($searchKeyword !== "") {
+      filters.push({ type: "keyword", keyword: $searchKeyword });
+    }
+
+    // find any selected filters
+    $filterOpts.forEach((filter) => {
+      filter.opts
+        .filter((opt) => opt.isSelected)
+        .forEach((activeOpt) => {
+          let { name, display } = activeOpt;
+          filters.push({ type: filter.name, name, display });
+        });
+    });
+
+    console.log(filters);
+    return filters;
+  }
+);
+
 export const filteredData = derived(
-  [searchKeyword, filters, rawData],
-  ([$searchKeyword, $filters, $rawData]) => {
-    if ($searchKeyword === "" && $filters.length === 0) {
+  [searchKeyword, activeFilters, rawData],
+  ([$searchKeyword, $activeFilters, $rawData]) => {
+    if ($searchKeyword === "" && $activeFilters.length === 0) {
       return $rawData;
     } else {
       // apply all filters
@@ -16,28 +44,6 @@ export const filteredData = derived(
     }
   }
 );
-
-const filterOpts = [
-  {
-    prop: "country", // property in the data
-    display: "Country", // How you want filter to be displayed
-    opts: Array.from(new Set(siteData.map((d) => d.country))).map((d) => ({ opt: d, display: d }))
-  },
-  {
-    prop: "institution",
-    display: "Institution",
-    opts: [
-      {
-        opt: "CEDAW",
-        display: "Committee on the Elimination of Discrimination Against Women (CEDAW)"
-      },
-      { opt: "UPR", display: "Universal Periodic Review (UPR)" },
-      { opt: "ECtHR", display: "European Court of Human Rights (ECtHR)" }
-    ]
-  }
-];
-
-console.log(filterOpts);
 
 /*
 
