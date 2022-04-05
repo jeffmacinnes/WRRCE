@@ -1,17 +1,34 @@
 <script>
-  import { filteredData, rawData, showFilters } from "$stores/dataStores.js";
+  import {
+    filteredData,
+    rawDataCount,
+    activeFilters,
+    filterOpts,
+    showFilters
+  } from "$stores/dataStores.js";
   import CTA from "$components/common/CTA.svelte";
+  import FilterPill from "$components/filters/FilterPill.svelte";
 
   const toggleFiltersPanel = () => {
     showFilters.set(!$showFilters);
   };
 
+  const clearFilter = (filter) => {
+    // reset the isSelected flag for the given filterOpt
+    filterOpts.update((store) => {
+      let filterIdx = store.findIndex((d) => d.name === filter.type);
+      let optIdx = store[filterIdx].opts.findIndex((opt) => opt.name === filter.opt);
+      store[filterIdx].opts[optIdx].isSelected = false;
+      return store;
+    });
+  };
+
   $: countText =
-    $filteredData.length === $rawData.length
-      ? `Showing <b>${$rawData.length.toLocaleString("en-US")}</b> total recommendations`
+    $activeFilters.length === 0
+      ? `Showing <b>${$rawDataCount.toLocaleString("en-US")}</b> total recommendations`
       : `Showing <b>${$filteredData.length.toLocaleString(
           "en-US"
-        )}</b> out of <b>${$rawData.length.toLocaleString(
+        )}</b> out of <b>${$rawDataCount.toLocaleString(
           "en-US"
         )}</b> total recommendations, filtered by:`;
   $: filterToggleText = $showFilters ? "Hide filters" : "Select filters";
@@ -33,7 +50,16 @@
     </div>
 
     <div class="current-filters-container">
-      <div class="body-rg">{@html countText}</div>
+      <div class="body-rg filter-count-label">{@html countText}</div>
+      <div class="pills-container">
+        {#each $activeFilters as filter}
+          <FilterPill
+            title={filter.typeDisplay}
+            name={filter.optDisplay}
+            onClose={() => clearFilter(filter)}
+          />
+        {/each}
+      </div>
     </div>
 
     <div class="download-container">
@@ -65,6 +91,10 @@
       background: inherit;
       z-index: 2;
     }
+  }
+
+  .filter-count-label {
+    margin-bottom: 5px;
   }
 
   .container .filters-toggle-container {

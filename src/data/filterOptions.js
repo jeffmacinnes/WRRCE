@@ -1,4 +1,4 @@
-import siteData from "$data/siteData.csv";
+import siteData from "$data/processed/combinedData.csv";
 
 export const filterOptions = [
   {
@@ -36,6 +36,29 @@ export const filterOptions = [
       { name: "delegation", display: "Delegation" },
       { name: "execution", display: "Execution" },
       { name: "compliance", display: "Compliance" }
+    ]
+  },
+  {
+    name: "action",
+    display: "Action",
+    opts: [
+      { name: 1, display: "1 - IO-Oriented" },
+      { name: 2, display: "2 - Assessment" },
+      { name: 3, display: "3 - Provisions of Justice and Accountability" },
+      { name: 4, display: "4 - Changing Societal Attitudes" },
+      { name: 5, display: "5 - Legal and Legislative Changes" },
+      { name: 6, display: "6 - Policy and Programming" },
+      { name: 7, display: "7 - Implementation" },
+      { name: 8, display: "8 - Overarching Actions with No Accountable Actors" }
+    ]
+  },
+  {
+    name: "precision",
+    display: "Precision",
+    opts: [
+      { name: 1, display: "1 - Passive" },
+      { name: 2, display: "2 - Guided" },
+      { name: 3, display: "3 - Directive" }
     ]
   }
 ].map((d) => ({ ...d, isOpen: false, opts: d.opts.map((opt) => ({ ...opt, isSelected: false })) }));

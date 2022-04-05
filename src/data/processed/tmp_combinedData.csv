@@ -1,0 +1,9 @@
+year,nomention,inaction,consideration,delegation,execution,compliance,vaw,econ,action,precision
+2010,999,999,999,999,999,1,true,false,5,1
+2010,0,0,0,0,0,1,true,false,8,3
+2010,0,0,0,0,0,1,false,true,6,3
+2010,1,0,0,0,0,0,true,false,5,3
+2010,1,0,0,0,0,0,true,false,3,3
+2010,999,999,999,999,999,1,true,false,8,1
+2010,0,0,0,0,0,1,true,false,5,3
+2010,0,0,0,0,0,1,true,false,3,3

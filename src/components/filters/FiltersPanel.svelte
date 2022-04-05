@@ -5,7 +5,6 @@
   import Icon from "$components/helpers/Icon.svelte";
   import Filter from "$components/filters/Filter.svelte";
   import CTA from "$components/common/CTA.svelte";
-  import { filter } from "d3";
 
   let w = 300;
 
@@ -122,6 +121,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin-bottom: 50px;
 
     h4 {
       padding-left: 15px;

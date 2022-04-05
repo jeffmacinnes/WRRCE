@@ -43,6 +43,7 @@
   },
   "browserslist": "> 0.5%, last 4 versions, not ie <= 11, not ie_mob <= 11",
   "dependencies": {
-    "@portabletext/svelte": "^0.2.0"
+    "@portabletext/svelte": "^0.2.0",
+    "fuse.js": "^6.5.3"
   }
 }

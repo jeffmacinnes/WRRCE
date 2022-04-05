@@ -1,12 +1,12 @@
 <script>
-  import { filteredData, rawData } from "$stores/dataStores.js";
+  import { filteredData, rawDataCount, activeFilters } from "$stores/dataStores.js";
 
   $: countText =
-    $filteredData.length === $rawData.length
-      ? `<b>${$rawData.length.toLocaleString("en-US")}</b> total recommendations`
+    $activeFilters.length === 0
+      ? `<b>${$rawDataCount.toLocaleString("en-US")}</b> total recommendations`
       : `<b>${$filteredData.length.toLocaleString(
           "en-US"
-        )}</b> out of <b>${$rawData.length.toLocaleString("en-US")}</b> total recommendations`;
+        )}</b> out of <b>${$rawDataCount.toLocaleString("en-US")}</b> total recommendations`;
 </script>
 
 <div class="table-container shadow">
