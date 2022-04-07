@@ -1,7 +1,7 @@
 <script>
   import CurrentFilters from "$components/filters/CurrentFilters.svelte";
   import FiltersPanel from "$components/filters/FiltersPanel.svelte";
-  import CurrentVisualization from "$components/visualizations/CurrentVisualization.svelte";
+  import Visualizations from "$components/visualizations/Visualizations.svelte";
   import Table from "$components/table/Table.svelte";
 </script>
 
@@ -16,7 +16,7 @@
     </div>
 
     <div class="visualization-container">
-      <h1>VISUALIZATIONS GO HERE</h1>
+      <Visualizations />
     </div>
 
     <div class="table-container">
@@ -52,6 +52,7 @@
     position: sticky;
     top: 150px;
     overscroll-behavior: contain;
+    z-index: 1;
   }
 
   .visualization-container {

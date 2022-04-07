@@ -2,7 +2,7 @@
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
 
-  import Logo from "$assets/WRRCE_logo.svg";
+  import Logo from "$assets/WRRCE_logo_color.svg";
 
   const links = [
     { title: "Explore", path: "/" },

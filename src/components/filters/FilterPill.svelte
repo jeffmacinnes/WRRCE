@@ -24,7 +24,7 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 12px;
-    padding: 8px 13px;
+    padding: 6px 13px;
     margin: 2px;
     background-color: var(--color-c3);
   }
