@@ -23,6 +23,7 @@
     "d3": "^7.3.0",
     "fast-csv": "^4.3.6",
     "feather-icons": "^4.28.0",
+    "layercake": "^6.1.0",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "node-fetch": "^3.2.0",
@@ -35,6 +36,7 @@
     "svelte": "^3.46.4",
     "svelte-preprocess": "^4.10.2",
     "title-case": "^3.0.3",
+    "topojson-client": "^3.1.0",
     "vite-plugin-svgstring": "^1.0.0"
   },
   "type": "module",

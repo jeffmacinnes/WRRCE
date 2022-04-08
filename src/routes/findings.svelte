@@ -17,8 +17,6 @@
   import Finding from "$components/common/Finding.svelte";
   export let copy;
 
-  console.log(copy);
-
   // prep copy
   let { heading, body, findings } = copy;
   body = body.split("\n").filter((d) => d.length > 0);

@@ -1,9 +1,10 @@
 <script>
-  import Toggle from "$components/helpers/Toggle.svelte";
+  import { fade, fly } from "svelte/transition";
+  import Map from "$components/visualizations/Map/Map.svelte";
   import VizTest from "./VizTest.svelte";
 
   const visOpts = [
-    { cmp: VizTest, props: { color: "#529D8E", name: "Viz 1" } },
+    { cmp: Map, props: { color: "#529D8E", name: "Viz 1" } },
     { cmp: VizTest, props: { color: "#D4B483", name: "Viz 2" } },
     { cmp: VizTest, props: { color: "#3E3D81", name: "Viz 3" } },
     { cmp: VizTest, props: { color: "#DBF4AD", name: "Viz 4" } }
@@ -27,7 +28,13 @@
 
 <div class="visualization-container">
   {#key currentIdx}
-    <svelte:component this={visOpts[currentIdx].cmp} {...visOpts[currentIdx].props} />
+    <div
+      class="viz-wrapper"
+      in:fly={{ delay: 500, x: 500, duration: 500 }}
+      out:fly={{ duration: 500, x: -500 }}
+    >
+      <svelte:component this={visOpts[currentIdx].cmp} {...visOpts[currentIdx].props} />
+    </div>
   {/key}
   <div class="button shadow" on:click={() => nextVis()}>Viz Toggle</div>
 </div>
@@ -41,6 +48,15 @@
     width: 100%;
     height: 900px;
     background-color: var(--color-c1);
+  }
+
+  .viz-wrapper {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
   }
 
   .button {

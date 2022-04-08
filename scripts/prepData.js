@@ -4,7 +4,7 @@ import fastcsv from "fast-csv";
 import { titleCase } from "title-case";
 
 const CEDAW_fname = "20220205_CEDAW.csv";
-const ECtHR_fname = "20220205_ECtHR.csv";
+const ECtHR_fname = "20220407_ECtHR.csv";
 const UPR_fname = "20220205_UPR.csv";
 
 const rawDir = "src/data/raw";
@@ -104,10 +104,10 @@ const prepUPR = async () => {
   // prep UPR
   let UPR = await prepUPR();
 
-  // combine, format, and save
-  const combined = [...CEDAW, ...UPR, ...ECtHR].map((d) => ({
+  // combine
+  let combined = [...CEDAW, ...UPR, ...ECtHR].map((d) => ({
     ...d,
-    ccode: +d.ccode,
+    ccode: d.ccode,
     year: +d.year,
     recommendation: d.recommendation.replace(/(\r\n|\n|\r)/gm, ""),
     nomention: +d.nomention,
@@ -122,6 +122,20 @@ const prepUPR = async () => {
     action: +d.action,
     precision: +d.precision
   }));
+
+  // clean up country names
+  combined = combined.map((d) => {
+    if (d.country === "Bosnia & Herzegovina") {
+      return { ...d, country: "Bosnia Herzegovina" };
+    } else if (d.ccode === "352") {
+      return { ...d, country: "Cyprus" };
+    } else if (d.ccode === "365") {
+      return { ...d, country: "Russia" };
+    }
+    return d;
+  });
+
+  // format and save
   console.log("writing data...");
   const ws = fs.createWriteStream("src/data/processed/combinedData.csv");
   fastcsv.write(combined, { headers: true }).pipe(ws);

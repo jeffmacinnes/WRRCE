@@ -3,7 +3,7 @@ import siteData from "$data/processed/combinedData.csv";
 import { filterOptions } from "$data/filterOptions";
 import Fuse from "fuse.js";
 
-export const showFilters = writable(true);
+export const showFilters = writable(false);
 export const searchKeyword = writable("");
 export const filterOpts = writable(filterOptions);
 export const rawDataCount = writable(siteData.length);
@@ -60,7 +60,7 @@ export const activeFilters = derived(
         });
     });
 
-    console.log(filters);
+    console.log("filters", filters);
     return filters;
   }
 );
