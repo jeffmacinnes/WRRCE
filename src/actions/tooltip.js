@@ -43,8 +43,22 @@ export function tooltip(element, params = {}) {
   let tooltipComponent = params.component;
   let tooltipProps = params.props;
 
+  function generateGetBoundingClientRect(x = 0, y = 0) {
+    return () => ({
+      width: 0,
+      height: 0,
+      top: y,
+      right: x,
+      bottom: y,
+      left: x
+    });
+  }
+
+  const virtualElement = {
+    getBoundingClientRect: generateGetBoundingClientRect()
+  };
+
   function mouseOver(event) {
-    console.log(event);
     tooltipRef = new tooltipComponent({
       props: {
         ...tooltipProps,
@@ -56,17 +70,14 @@ export function tooltip(element, params = {}) {
 
     let tooltip = document.querySelector("#tooltip");
     tooltip.setAttribute("data-show", "");
-    popperRef = createPopper(element, tooltip, {
+
+    popperRef = createPopper(virtualElement, tooltip, {
       placement: "top",
       modifiers: [
         {
           name: "offset",
           options: {
-            offset: ({ placement, reference, popper }) => {
-              console.log(reference, event);
-              let center = [reference.width / 2, reference.height / 2];
-              return [-center[0], -center[1]];
-            }
+            offset: [0, 8]
           }
         }
       ]
@@ -74,6 +85,10 @@ export function tooltip(element, params = {}) {
   }
 
   function mouseMove(event) {
+    let { clientX: x, clientY: y } = event;
+    virtualElement.getBoundingClientRect = generateGetBoundingClientRect(x, y);
+    popperRef.update();
+
     tooltipRef.$set({
       x: event.pageX,
       y: event.pageY
