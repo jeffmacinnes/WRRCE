@@ -2,6 +2,7 @@
   import {
     filteredData,
     rawDataCount,
+    searchKeyword,
     activeFilters,
     filterOpts,
     showFilters
@@ -14,13 +15,17 @@
   };
 
   const clearFilter = (filter) => {
-    // reset the isSelected flag for the given filterOpt
-    filterOpts.update((store) => {
-      let filterIdx = store.findIndex((d) => d.name === filter.type);
-      let optIdx = store[filterIdx].opts.findIndex((opt) => opt.name === filter.opt);
-      store[filterIdx].opts[optIdx].isSelected = false;
-      return store;
-    });
+    if (filter.type === "keyword") {
+      searchKeyword.set("");
+    } else {
+      // reset the isSelected flag for the given filterOpt
+      filterOpts.update((store) => {
+        let filterIdx = store.findIndex((d) => d.name === filter.type);
+        let optIdx = store[filterIdx].opts.findIndex((opt) => opt.name === filter.opt);
+        store[filterIdx].opts[optIdx].isSelected = false;
+        return store;
+      });
+    }
   };
 
   $: countText =

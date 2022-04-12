@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@poppanator/sveltekit-svg": "^0.3.1",
+    "@popperjs/core": "^2.11.2",
     "@rollup/plugin-dsv": "^2.0.3",
     "@sanity/client": "^3.0.6",
     "@sveltejs/adapter-static": "1.0.0-next.26",
@@ -20,7 +21,7 @@
     "archieml": "^0.5.0",
     "autoprefixer": "^10.4.2",
     "csvtojson": "^2.0.10",
-    "d3": "^7.3.0",
+    "d3": "^7.4.3",
     "fast-csv": "^4.3.6",
     "feather-icons": "^4.28.0",
     "layercake": "^6.1.0",
@@ -46,6 +47,7 @@
   "browserslist": "> 0.5%, last 4 versions, not ie <= 11, not ie_mob <= 11",
   "dependencies": {
     "@portabletext/svelte": "^0.2.0",
-    "fuse.js": "^6.5.3"
+    "fuse.js": "^6.5.3",
+    "textures": "^1.2.3"
   }
 }

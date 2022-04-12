@@ -1,4 +1,4 @@
-import { derived, writable } from "svelte/store";
+import { derived, readable, writable } from "svelte/store";
 import siteData from "$data/processed/combinedData.csv";
 import { filterOptions } from "$data/filterOptions";
 import Fuse from "fuse.js";
@@ -6,23 +6,27 @@ import Fuse from "fuse.js";
 export const showFilters = writable(false);
 export const searchKeyword = writable("");
 export const filterOpts = writable(filterOptions);
+export const fullData = readable([], (set) => set(parseData(siteData)));
 export const rawDataCount = writable(siteData.length);
 
-// parse the raw site data
-let rawData = siteData.map((d) => ({
-  ...d,
-  action: +d.action,
-  precision: +d.precision,
-  nomention: +d.nomention,
-  inaction: +d.inaction,
-  consideration: +d.consideration,
-  delegation: +d.delegation,
-  execution: +d.execution,
-  compliance: +d.compliance,
-  vaw: d.vaw === "true",
-  econ: d.econ === "true",
-  year: +d.year
-}));
+function parseData(siteData) {
+  return siteData.map((d) => ({
+    ...d,
+    action: +d.action,
+    precision: +d.precision,
+    nomention: +d.nomention,
+    inaction: +d.inaction,
+    consideration: +d.consideration,
+    delegation: +d.delegation,
+    execution: +d.execution,
+    compliance: +d.compliance,
+    vaw: d.vaw === "true",
+    econ: d.econ === "true",
+    year: +d.year
+  }));
+}
+
+let rawData = parseData(siteData);
 
 // --- FUSE fuzzy keyword search
 const fuseData = new Fuse(rawData, {
@@ -42,7 +46,12 @@ export const activeFilters = derived(
 
     // get the current search term
     if ($searchKeyword !== "") {
-      filters.push({ type: "keyword", keyword: $searchKeyword });
+      filters.push({
+        type: "keyword",
+        typeDisplay: "keyword",
+        opt: $searchKeyword,
+        optDisplay: $searchKeyword
+      });
     }
 
     // find any selected filters
@@ -76,7 +85,7 @@ export const filteredData = derived([activeFilters], ([$activeFilters]) => {
   // keyword
   const kwFilter = $activeFilters.find((d) => d.type === "keyword");
   if (kwFilter) {
-    result = filterByKeyword(kwFilter.keyword);
+    result = filterByKeyword(kwFilter.opt);
   }
 
   // countries
