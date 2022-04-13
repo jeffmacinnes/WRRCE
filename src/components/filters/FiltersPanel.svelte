@@ -152,7 +152,7 @@
     border-bottom: solid 1px black;
 
     &::placeholder {
-      color: var(--color-g1);
+      color: var(--color-g3);
       font-size: 16px;
     }
 

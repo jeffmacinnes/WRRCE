@@ -3,7 +3,7 @@
   import { tweened } from "svelte/motion";
   import { cubicOut } from "svelte/easing";
   import { tooltip } from "$actions/tooltip";
-  import { geoPath } from "d3-geo";
+  import { geoGraticule10, geoPath } from "d3-geo";
   import * as d3 from "d3";
   import textures from "textures";
   import { raise } from "layercake";
@@ -13,6 +13,10 @@
   export let countryData;
   export let maxRecs;
   export let zoomLevel = 1;
+  export const resetTranslation = () => {
+    translate = `translate(0, 0)`;
+    dispatch("mapIsTranslated", false);
+  };
 
   const dispatch = createEventDispatcher();
   const { data, width, height } = getContext("LayerCake");
@@ -32,10 +36,18 @@
   $: features = $data.features.map((feature) => {
     let fill = "#e8e8e8";
     let match = countryData.find((d) => d.ccode === feature.properties.ccode);
+    let nRecs = 0;
     if (match) {
       fill = colorScale(match.nRecs);
+      nRecs = match.nRecs;
     }
     feature.properties.fill = fill;
+    feature.properties.nRecs = nRecs;
+
+    // manually overwrite Belarus
+    if (feature.properties.ccode === "370") {
+      feature.properties.nRecs = null;
+    }
 
     // project centroid coordinates
     feature.properties.center = projection(feature.properties.centroid.coordinates);
@@ -74,6 +86,7 @@
   const zoomed = (event) => {
     let { x, y } = event.transform; // get x and y transform from the zoom event
     translate = `translate(${x}, ${y})`;
+    dispatch("mapIsTranslated", true);
   };
   const zoom = d3.zoom().on("zoom", zoomed).scaleExtent([1, 1]);
   $: transform = `${translate} ${scale}`;
@@ -85,6 +98,9 @@
 </script>
 
 <g bind:this={node} class="map-group" {transform}>
+  <!-- Graticules -->
+  <path class="graticule" fill="none" d={geoPathFn(d3.geoGraticule10())} />
+
   {#each features as feature, i (i)}
     <!-- Country Outline -->
     <path
@@ -100,31 +116,18 @@
       on:mousemove={handleMousemove(feature)}
     />
   {/each}
-  <!-- 
-  {#each features as feature (feature.id)}
-    <circle
-      class="feature-center"
-      cx={feature.properties.center[0]}
-      cy={feature.properties.center[1]}
-      r={3}
-      fill="red"
-    />
-    <text
-      class="feature-center"
-      x={feature.properties.center[0]}
-      y={feature.properties.center[1]}
-      text-anchor="middle"
-      dominant-baseline="center">{feature.properties.name}</text
-    >
-  {/each} -->
 </g>
 
 <style lang="scss">
+  .graticule {
+    stroke: var(--color-g2);
+  }
+
   .feature-path {
     cursor: pointer;
 
     &:hover {
-      stroke: red;
+      stroke: black;
     }
   }
 </style>

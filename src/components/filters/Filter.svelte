@@ -72,7 +72,7 @@
     line-height: 24px;
     letter-spacing: 0.015;
     text-transform: uppercase;
-    color: var(--color-g1);
+    color: var(--color-g3);
 
     &:hover {
       opacity: 0.6;
@@ -124,7 +124,7 @@
       height: 15px;
       width: 15px;
       border-radius: 50%;
-      border: solid 1px var(--color-g1);
+      border: solid 1px var(--color-g3);
       background-color: var(--color-white);
     }
 

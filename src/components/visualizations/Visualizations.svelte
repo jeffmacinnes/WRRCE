@@ -29,7 +29,7 @@
 <div class="visualization-container">
   {#key currentIdx}
     <div
-      class="viz-wrapper"
+      class="viz-wrapper shadow"
       in:fly={{ delay: 500, x: 500, duration: 500 }}
       out:fly={{ duration: 500, x: -500 }}
     >
@@ -47,7 +47,7 @@
     align-items: center;
     width: 100%;
     height: 900px;
-    background-color: var(--color-c1);
+    background-color: var(--color-g1);
   }
 
   .viz-wrapper {
@@ -55,6 +55,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 15px;
     width: 90%;
     height: 90%;
   }

@@ -25,7 +25,16 @@
       "value": "#0B0A61"
     },
     "g1": {
-      "value": "#B9B9B9"
+      "value": "#F2F3F6"
+    },
+    "g2": {
+      "value": "#E8E8E8"
+    },
+    "g3": {
+      "value": "BDBDBD"
+    },
+    "g4": {
+      "value": "#9E9D9D"
     }
   }
 }

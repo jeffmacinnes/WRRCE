@@ -33,7 +33,7 @@
   .explore-container {
     position: relative;
     height: 100%;
-    background: var(--color-g1);
+    background: var(--3);
   }
 
   .fg {
@@ -57,7 +57,7 @@
 
   .visualization-container {
     height: 900px;
-    background-color: var(--color-c1);
+    background-color: var(--color-g1);
     display: flex;
     justify-content: center;
     align-items: center;
