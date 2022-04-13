@@ -15,13 +15,6 @@
   ];
 
   let currentIdx = 0;
-
-  const nextVis = () => {
-    currentIdx++;
-    if (currentIdx === visOpts.length) {
-      currentIdx = 0;
-    }
-  };
 </script>
 
 <div class="visualization-container">
@@ -41,7 +34,10 @@
   </div>
 
   <div class="view-controls">
-    <div class="button shadow" on:click={() => nextVis()}>Viz Toggle</div>
+    <h4 class="label">views</h4>
+    {#each [0, 1, 2, 3] as viewIdx}
+      <div class="view-button shadow" on:click={() => (currentIdx = viewIdx)} />
+    {/each}
   </div>
 </div>
 
@@ -88,7 +84,25 @@
   }
 
   .view-controls {
-    width: 200px;
-    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    .label {
+      text-transform: uppercase;
+      margin-right: 10px;
+    }
+
+    .view-button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: var(--color-c2);
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
   }
 </style>
