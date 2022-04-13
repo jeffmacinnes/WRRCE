@@ -36,23 +36,29 @@
       <svelte:component this={visOpts[currentIdx].cmp} {...visOpts[currentIdx].props} />
     </div>
   {/key}
-  <div class="button shadow" on:click={() => nextVis()}>Viz Toggle</div>
+
+  <div class="view-controls">
+    <div class="button shadow" on:click={() => nextVis()}>Viz Toggle</div>
+  </div>
 </div>
 
 <style lang="scss">
   .visualization-container {
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 900px;
+    min-height: 900px;
     background-color: var(--color-g1);
+    border: solid 1px red;
   }
 
   .viz-wrapper {
     position: absolute;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 15px;
@@ -60,18 +66,9 @@
     height: 90%;
   }
 
-  .button {
-    position: absolute;
-    top: 50px;
-    right: 50px;
-    z-index: 10;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #e8e8e8;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #eee;
-    }
+  .view-controls {
+    width: 200px;
+    padding: 15px;
+    border: solid 1px red;
   }
 </style>

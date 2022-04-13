@@ -62,10 +62,11 @@
   let buttonSize = "25px";
 </script>
 
+<div class="title">
+  <h4>Regional Trends in Recommendation Compliance</h4>
+</div>
+
 <div class="map-container">
-  <div class="title">
-    <h4>Regional Trends in Recommendation Compliance</h4>
-  </div>
   <LayerCake data={geojson}>
     <Svg bind:element={svgElement} let:element>
       <MapSvg
@@ -135,8 +136,8 @@
 <style lang="scss">
   .title {
     width: 100%;
-    z-index: 1;
-    position: absolute;
+    // z-index: 1;
+    // position: absolute;
     top: 0px;
     left: 0px;
     padding: 8px;

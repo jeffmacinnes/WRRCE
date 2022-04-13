@@ -73,6 +73,7 @@ export function tooltip(element, params = {}) {
 
     popperRef = createPopper(virtualElement, tooltip, {
       placement: "top",
+      strategy: "fixed",
       modifiers: [
         {
           name: "offset",

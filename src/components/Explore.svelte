@@ -56,11 +56,10 @@
   }
 
   .visualization-container {
-    height: 900px;
     background-color: var(--color-g1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
   }
 
   .table-container {
