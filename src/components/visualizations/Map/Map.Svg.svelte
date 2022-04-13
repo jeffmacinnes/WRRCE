@@ -44,16 +44,19 @@
     feature.properties.fill = fill;
     feature.properties.nRecs = nRecs;
 
-    // manually overwrite Belarus
-    if (feature.properties.ccode === "370") {
+    // manually overwrite Belarus (370) and Kosovo (370)
+    if (["370", "347"].includes(feature.properties.ccode)) {
       feature.properties.nRecs = null;
     }
 
     // project centroid coordinates
-    feature.properties.center = projection(feature.properties.centroid.coordinates);
+    // feature.properties.center = projection(feature.properties.centroid.coordinates);
 
     return feature;
   });
+
+  $: console.log(features.filter((d) => d.properties.name === "North Macedonia"));
+  $: console.log(countryData);
 
   // --- Fill Colors/Texture
   const landColor = "#e8e8e8";
@@ -61,7 +64,7 @@
   $: colorScale = d3.scaleSequential().range(["#e8e8e8", "#288983"]).domain([0, maxRecs]);
   const getColor = (ccode) => {
     // return  the color of the country with the given ccode
-    if (ccode === "370") return texture.url(); // No data on Belarus
+    if (["370", "347"].includes(ccode)) return texture.url(); // No data on Belarus (370) or Kosovo (347)
 
     let match = countryData.find((d) => d.ccode === ccode);
     return match ? colorScale(match.nRecs) : landColor;

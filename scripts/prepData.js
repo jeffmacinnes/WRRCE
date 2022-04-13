@@ -127,6 +127,8 @@ const prepUPR = async () => {
   combined = combined.map((d) => {
     if (d.country === "Bosnia & Herzegovina") {
       return { ...d, country: "Bosnia Herzegovina" };
+    } else if (d.country === "Macedonia") {
+      return { ...d, country: "North Macedonia" };
     } else if (d.ccode === "352") {
       return { ...d, country: "Cyprus" };
     } else if (d.ccode === "365") {
