@@ -15,9 +15,7 @@
       <FiltersPanel />
     </div>
 
-    <div class="visualization-container">
-      <Visualizations />
-    </div>
+    <Visualizations />
 
     <div class="table-container">
       <h1>TABLE GOES HERE</h1>
@@ -53,13 +51,6 @@
     top: 150px;
     overscroll-behavior: contain;
     z-index: 1;
-  }
-
-  .visualization-container {
-    background-color: var(--color-g1);
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
   }
 
   .table-container {

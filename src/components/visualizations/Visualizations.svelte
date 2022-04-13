@@ -4,10 +4,14 @@
   import VizTest from "./VizTest.svelte";
 
   const visOpts = [
-    { cmp: Map, props: { color: "#529D8E", name: "Viz 1" } },
-    { cmp: VizTest, props: { color: "#D4B483", name: "Viz 2" } },
-    { cmp: VizTest, props: { color: "#3E3D81", name: "Viz 3" } },
-    { cmp: VizTest, props: { color: "#DBF4AD", name: "Viz 4" } }
+    {
+      cmp: Map,
+      title: "Regional Trends in Recommendation Compliance",
+      props: { color: "#529D8E", name: "Viz 1" }
+    },
+    { cmp: VizTest, title: "", props: { color: "#D4B483", name: "Viz 2" } },
+    { cmp: VizTest, title: "", props: { color: "#3E3D81", name: "Viz 3" } },
+    { cmp: VizTest, title: "", props: { color: "#DBF4AD", name: "Viz 4" } }
   ];
 
   let currentIdx = 0;
@@ -18,24 +22,23 @@
       currentIdx = 0;
     }
   };
-
-  /* CHILDREN:
-    - view selector
-    - legend
-      - scale by option
-  */
 </script>
 
 <div class="visualization-container">
-  {#key currentIdx}
-    <div
-      class="viz-wrapper shadow"
-      in:fly={{ delay: 500, x: 500, duration: 500 }}
-      out:fly={{ duration: 500, x: -500 }}
-    >
-      <svelte:component this={visOpts[currentIdx].cmp} {...visOpts[currentIdx].props} />
-    </div>
-  {/key}
+  <div class="view-container">
+    {#key currentIdx}
+      <div
+        class="current-view-wrapper shadow"
+        in:fly={{ delay: 500, x: 500, duration: 500 }}
+        out:fly={{ duration: 500, x: -500 }}
+      >
+        <div class="title">
+          <h4>{visOpts[currentIdx].title}</h4>
+        </div>
+        <svelte:component this={visOpts[currentIdx].cmp} {...visOpts[currentIdx].props} />
+      </div>
+    {/key}
+  </div>
 
   <div class="view-controls">
     <div class="button shadow" on:click={() => nextVis()}>Viz Toggle</div>
@@ -49,26 +52,43 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 50px;
     width: 100%;
+    padding: 50px;
     min-height: 900px;
     background-color: var(--color-g1);
-    border: solid 1px red;
   }
 
-  .viz-wrapper {
-    position: absolute;
+  .view-container {
+    width: 100%;
+    height: 70vh;
+    max-height: 900px;
+  }
+
+  .current-view-wrapper {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 15px;
-    width: 90%;
-    height: 90%;
+    overflow: hidden;
+
+    .title {
+      width: 100%;
+      top: 0px;
+      left: 0px;
+      padding: 8px;
+      border-radius: 5px 5px 0px 0px;
+      text-align: center;
+      color: white;
+      background: var(--color-c4);
+    }
   }
 
   .view-controls {
     width: 200px;
     padding: 15px;
-    border: solid 1px red;
   }
 </style>

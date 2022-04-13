@@ -62,10 +62,6 @@
   let buttonSize = "25px";
 </script>
 
-<div class="title">
-  <h4>Regional Trends in Recommendation Compliance</h4>
-</div>
-
 <div class="map-container">
   <LayerCake data={geojson}>
     <Svg bind:element={svgElement} let:element>
@@ -134,27 +130,14 @@
 </div>
 
 <style lang="scss">
-  .title {
-    width: 100%;
-    // z-index: 1;
-    // position: absolute;
-    top: 0px;
-    left: 0px;
-    padding: 8px;
-    border-radius: 5px 5px 0px 0px;
-    text-align: center;
-    color: white;
-    background: var(--color-c4);
-  }
-
   .map-container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
     background-color: white;
-    border-radius: 15px;
     overflow: hidden;
   }
 
