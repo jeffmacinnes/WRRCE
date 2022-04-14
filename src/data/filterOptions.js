@@ -4,7 +4,9 @@ export const filterOptions = [
   {
     name: "country", // property in the data
     display: "Country", // How you want filter to be displayed
-    opts: Array.from(new Set(siteData.map((d) => d.country))).map((d) => ({ name: d, display: d }))
+    opts: Array.from(new Set(siteData.map((d) => d.country)))
+      .map((d) => ({ name: d, display: d }))
+      .sort((a, b) => a.name.localeCompare(b.name))
   },
   {
     name: "institution",

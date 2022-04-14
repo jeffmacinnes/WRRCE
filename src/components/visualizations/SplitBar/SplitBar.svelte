@@ -5,11 +5,13 @@
 
   import SmallMultipleWrapper from "./SmallMultipleWrapper.svelte";
 
-  let institutions = flatGroup($filteredData, (d) => d.institution).map((d) => ({
+  $: institutions = flatGroup($filteredData, (d) => d.institution).map((d) => ({
     institution: d[0],
     instData: d[1],
     bgData: $filteredData
   }));
+
+  $: console.log("institutions", institutions);
 
   let splitBy;
   const setSplitBy = (splitByVar) => {
@@ -25,6 +27,8 @@
       <SmallMultipleWrapper data={instition} {splitBy} />
     {/each}
   </div>
+
+  <div class="spacer" />
 
   <div class="split-var-container">
     {#each ["Compliance Status", "Action", "Precision"] as splitVarOpt, i}
@@ -50,6 +54,10 @@
     height: 100%;
     background-color: white;
     overflow: hidden;
+
+    // * {
+    //   border: solid 1px blue;
+    // }
   }
 
   .group-container {
@@ -62,8 +70,13 @@
     gap: 20px;
   }
 
+  .spacer {
+    height: 5%;
+  }
+
   .split-var-container {
     display: flex;
+    margin: 30px;
 
     .split-var {
       border: solid 2px var(--color-g2);
