@@ -1,5 +1,5 @@
 <script>
-  import { LayerCake, Svg, Html } from "layercake";
+  import { LayerCake, Svg } from "layercake";
   import { feature } from "topojson-client";
   import { flatRollup, rollup, max, greatest } from "d3";
   import Icon from "$components/helpers/Icon.svelte";
@@ -38,7 +38,6 @@
   let scaleType = "relative";
   const setScale = (type) => {
     scaleType = type;
-    console.log(scaleType);
   };
 
   const getMaxRecs = (data) => {

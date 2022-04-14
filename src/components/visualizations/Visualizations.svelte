@@ -1,6 +1,7 @@
 <script>
   import { fade, fly } from "svelte/transition";
   import Map from "$components/visualizations/Map/Map.svelte";
+  import SplitBar from "$components/visualizations/SplitBar/SplitBar.svelte";
   import VizTest from "./VizTest.svelte";
 
   const visOpts = [
@@ -9,12 +10,15 @@
       title: "Regional Trends in Recommendation Compliance",
       props: { color: "#529D8E", name: "Viz 1" }
     },
-    { cmp: VizTest, title: "", props: { color: "#D4B483", name: "Viz 2" } },
-    { cmp: VizTest, title: "", props: { color: "#3E3D81", name: "Viz 3" } },
-    { cmp: VizTest, title: "", props: { color: "#DBF4AD", name: "Viz 4" } }
+    {
+      cmp: SplitBar,
+      title: "Recommendations by Institution",
+      props: { color: "#D4B483", name: "Viz 2" }
+    },
+    { cmp: VizTest, title: "", props: { color: "#3E3D81", name: "Viz 3" } }
   ];
 
-  let currentIdx = 0;
+  let currentIdx = 1;
 </script>
 
 <div class="visualization-container">

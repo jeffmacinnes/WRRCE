@@ -55,9 +55,6 @@
     return feature;
   });
 
-  $: console.log(features.filter((d) => d.properties.name === "North Macedonia"));
-  $: console.log(countryData);
-
   // --- Fill Colors/Texture
   const landColor = "#e8e8e8";
   const texture = textures.lines().size(8).strokeWidth(1).stroke("#fff").background(landColor);
@@ -102,7 +99,7 @@
 
 <g bind:this={node} class="map-group" {transform}>
   <!-- Graticules -->
-  <path class="graticule" fill="none" d={geoPathFn(d3.geoGraticule10())} />
+  <path class="graticule" fill="none" d={geoPathFn(geoGraticule10())} />
 
   {#each features as feature, i (i)}
     <!-- Country Outline -->
