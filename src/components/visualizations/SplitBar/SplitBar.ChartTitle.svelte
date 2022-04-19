@@ -1,9 +1,7 @@
 <script>
-  import { getContext } from "svelte";
   import { category } from "$data/variables.json";
 
   export let titleWidth;
-  export let maxWidth;
   export let institution;
 </script>
 
