@@ -1,16 +1,29 @@
 <script>
-  import Icon from "$components/helpers/Icon.svelte";
+  import { tooltip } from "$actions/tooltip";
   import { color } from "$data/variables.json";
+  import Icon from "$components/helpers/Icon.svelte";
+  import Tooltip from "$components/tooltips/Tooltip.svelte";
 
   export let title = "";
   export let name = "";
   export let onClose = () => {};
+
+  let maxLength = 30;
+  $: displayedName = name.length > maxLength ? `${name.slice(0, maxLength - 3)}...` : name;
 </script>
 
 <div class="pill-container shadow">
   <div class="content-container">
     <div class="title">{title}</div>
-    <div class="name">{name}</div>
+    <div
+      class="name"
+      use:tooltip={{
+        component: Tooltip,
+        props: { text: name }
+      }}
+    >
+      {displayedName}
+    </div>
   </div>
   <div class="close-container" on:click={onClose}>
     <Icon name="x" width="16px" height="16px" stroke={color.c3} strokeWidth="3px" />
@@ -49,6 +62,7 @@
       letter-spacing: 0.005em;
       line-height: 1.333;
       color: var(--color-white);
+      cursor: pointer;
     }
   }
 
