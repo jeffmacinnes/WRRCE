@@ -1,3 +1,13 @@
 {
-  "category": {}
+  "category": {
+    "CEDAW": {
+      "value": "#529D8E"
+    },
+    "ECtHR": {
+      "value": "#282875"
+    },
+    "UPR": {
+      "value": "#D4B483"
+    }
+  }
 }

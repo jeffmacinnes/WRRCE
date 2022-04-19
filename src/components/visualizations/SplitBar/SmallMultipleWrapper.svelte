@@ -1,26 +1,44 @@
 <script>
-  import { LayerCake, Svg } from "layercake";
+  import { LayerCake, Svg, Html } from "layercake";
   import { scaleBand } from "d3";
   import { getNumRecsBySplit } from "./utils";
 
   import SplitBarChart from "./SplitBar.Chart.svelte";
+  import SplitBarChartTitle from "./SplitBar.ChartTitle.svelte";
+  import SplitBarXLabels from "./SplitBar.XLabels.svelte";
 
   export let data;
+  export let institution;
   export let splitBy;
+  export let showXLabels;
 
-  let { institution, instData, bgData } = data;
+  // get recommendation counts by 'splitByVar' on background data to use as layercake scale extents
+  $: bgNRecs = getNumRecsBySplit(data, splitBy);
 
-  // get recommendation counts by 'splitByVar'
-  $: bgNRecs = getNumRecsBySplit(bgData, splitBy); // passed to layercake so scales are set on larger of the two datasets
-  $: instNRecs = getNumRecsBySplit(instData, splitBy); // passed to splitBar chart cmp
+  let titleWidth = 200;
 </script>
 
 <LayerCake
-  data={bgNRecs}
-  xScale={scaleBand().paddingInner([0.02]).round(true)}
-  padding={{ top: 10, bottom: 10, left: 150, right: 150 }}
+  padding={{ top: 30, bottom: 30, left: titleWidth, right: 120 }}
+  {data}
+  x="display"
+  y="nRecs"
+  xDomain={splitBy.opts.map((d) => d.display)}
+  yDomain={[0, null]}
+  yNice={true}
+  xScale={scaleBand().paddingInner([0.1]).paddingOuter(0.1).round(true)}
+  flatData={bgNRecs}
 >
   <Svg>
-    <SplitBarChart {institution} {instData} />
+    <SplitBarChart {institution} {splitBy} />
   </Svg>
+  <Html>
+    <SplitBarChartTitle {titleWidth} {institution} />
+  </Html>
+
+  {#if showXLabels}
+    <Html>
+      <SplitBarXLabels />
+    </Html>
+  {/if}
 </LayerCake>

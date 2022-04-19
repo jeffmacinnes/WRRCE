@@ -1,5 +1,9 @@
 {
-  "category": {},
+  "category": {
+    "CEDAW": "#529D8E",
+    "ECtHR": "#282875",
+    "UPR": "#D4B483"
+  },
   "color": {
     "black": "#000000",
     "white": "#ffffff",
