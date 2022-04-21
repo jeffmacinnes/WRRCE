@@ -105,15 +105,16 @@
     margin: 7px 2px;
     padding-left: 25px;
     line-height: 1.33;
+    color: var(--color-g3);
     cursor: pointer;
     // border: solid 1px red;
 
     &:hover {
       opacity: 0.6;
 
-      .checkmark {
-        background-color: var(--color-c1);
-      }
+      // .checkmark {
+      //   background-color: var(--color-c1);
+      // }
     }
 
     // custom checkbox
@@ -129,6 +130,8 @@
     }
 
     &.checked {
+      color: var(--color-c3);
+
       .checkmark {
         background-color: var(--color-c4);
       }

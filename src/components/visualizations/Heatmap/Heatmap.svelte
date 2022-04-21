@@ -1,0 +1,113 @@
+<script>
+  import { LayerCake, Svg, Html } from "layercake";
+  import { flatRollup, groups, ascending, scaleBand } from "d3";
+  import { getYearlyRecsBySplit } from "./utils";
+  import { filterOpts, filteredData } from "$stores/dataStores";
+
+  import HistogramSvg from "./Histogram.Svg.svelte";
+  import HeatmapSvg from "./Heatmap.Svg.svelte";
+  import HeatmapYLabels from "./Heatmap.YLabels.svelte";
+  import HeatmapXLabels from "./Heatmap.XLabels.svelte";
+  import SplitByControls from "$components/common/SplitByControls.svelte";
+
+  // --- Shared Vis Props
+  const years = [...Array(13)].map((_, i) => 2007 + i);
+  const padding = { top: 30, bottom: 30, left: 30, right: 150 };
+  const xScale = scaleBand().paddingInner([0.1]).paddingOuter(0.1).round(true);
+
+  // --- Split By Var
+  let splitBy = $filterOpts.find((d) => d.display === "Compliance Status");
+  const handleSetSplitBy = (e) => {
+    // use the levels of the splitby var from the filter options list
+    splitBy = $filterOpts.find((d) => d.display === e.detail);
+  };
+
+  // --- Data prop
+  // convert filtered data to array of counts by year
+  $: histData = flatRollup(
+    $filteredData,
+    (v) => v.length,
+    (d) => d.year
+  )
+    .map((d) => ({ year: d[0], nRecs: d[1] }))
+    .sort((a, b) => ascending(a.year, b.year));
+
+  $: heatData = getYearlyRecsBySplit($filteredData, years, splitBy);
+
+  // ---- DEBUGGING ----
+  // $: console.log("years", years);
+  // $: console.log("heatdata", heatData);
+</script>
+
+<div class="temporal-container">
+  <!-- HISTOGRAM OF TOTALS BY YEAR -->
+  <div class="histogram-container">
+    <LayerCake
+      padding={{ ...padding, bottom: 0, top: 30 }}
+      data={histData}
+      x="year"
+      y="nRecs"
+      xDomain={years}
+      yDomain={[0, null]}
+      yNice={true}
+      {xScale}
+    >
+      <Svg>
+        <HistogramSvg />
+      </Svg>
+    </LayerCake>
+  </div>
+
+  <div class="heatmap-container">
+    <LayerCake
+      padding={{ ...padding, top: 25 }}
+      data={heatData}
+      x="year"
+      y="display"
+      {xScale}
+      xDomain={years}
+      yScale={scaleBand().paddingInner([0.1]).paddingOuter(0.1).round(true)}
+      yDomain={splitBy.opts.map((d) => d.display)}
+    >
+      <Html>
+        <HeatmapXLabels />
+        <HeatmapYLabels />
+      </Html>
+      <Svg>
+        <HeatmapSvg />
+      </Svg>
+    </LayerCake>
+  </div>
+
+  <SplitByControls currentSplitVar={splitBy} on:setSplitVar={handleSetSplitBy} />
+</div>
+
+<style lang="scss">
+  .temporal-container {
+    width: 100%;
+    height: 100%;
+    max-width: 1000px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    background-color: white;
+    overflow: hidden;
+  }
+
+  .histogram-container {
+    width: 100%;
+    height: 200px;
+    /* border: solid 1px red; */
+  }
+
+  .heatmap-container {
+    // border: solid 1px red;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 100px;
+  }
+</style>

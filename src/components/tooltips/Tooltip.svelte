@@ -11,6 +11,7 @@
 <style>
   .tooltip-container {
     position: absolute;
+    max-width: 300px;
     background: var(--color-white);
     border: solid 1px var(--color-g3);
     color: var(--color-c3);

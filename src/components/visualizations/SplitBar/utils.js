@@ -1,5 +1,3 @@
-import { data } from "autoprefixer";
-
 export const getNumRecsBySplit = (data, splitVar) => {
   // return the number of recs for each level of the given split var.
   // slightly different methods based on the given split var
@@ -10,7 +8,7 @@ export const getNumRecsBySplit = (data, splitVar) => {
         let { name, display } = opt;
         return {
           display,
-          nRecs: data.filter((d) => d[name] === 1).length
+          nRecs: data.filter((d) => d[name] === 1 || d[name] === 333).length
         };
       });
     case "Action":

@@ -1,6 +1,7 @@
 <script>
   import { filteredData, filterOpts } from "$stores/dataStores";
   import SmallMultipleWrapper from "./SmallMultipleWrapper.svelte";
+  import SplitByControls from "$components/common/SplitByControls.svelte";
 
   // set the list of institutions based off of the filter options
   let institutions = [];
@@ -11,12 +12,12 @@
       insts.filter((d) => d.isSelected).length === 0 ? insts : insts.filter((d) => d.isSelected);
   }
 
-  let splitBy;
-  const setSplitBy = (splitByVar) => {
+  // --- Split By Var
+  let splitBy = $filterOpts.find((d) => d.display === "Compliance Status");
+  const handleSetSplitBy = (e) => {
     // use the levels of the splitby var from the filter options list
-    splitBy = $filterOpts.find((d) => d.display === splitByVar);
+    splitBy = $filterOpts.find((d) => d.display === e.detail);
   };
-  setSplitBy("Compliance Status");
 </script>
 
 <div class="splitbar-container">
@@ -35,20 +36,7 @@
 
   <div class="spacer" />
 
-  <div class="split-controls-container">
-    Tally Recommendations By
-    <div class="split-var-container">
-      {#each ["Compliance Status", "Action", "Precision"] as splitVarOpt, i}
-        <div
-          class="split-var"
-          class:active={splitBy.display === splitVarOpt}
-          on:click={() => setSplitBy(splitVarOpt)}
-        >
-          {splitVarOpt}
-        </div>
-      {/each}
-    </div>
-  </div>
+  <SplitByControls currentSplitVar={splitBy} on:setSplitVar={handleSetSplitBy} />
 </div>
 
 <style lang="scss">
@@ -87,44 +75,5 @@
 
   .spacer {
     height: 5%;
-  }
-
-  .split-controls-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-  }
-
-  .split-var-container {
-    display: flex;
-    margin: 20px;
-    border-radius: 8px;
-    border: solid 2px var(--color-g3);
-    overflow: hidden;
-    text-transform: uppercase;
-    color: var(--color-g4);
-
-    .split-var {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-right: solid 1px var(--color-g3);
-      padding: 5px 10px;
-      cursor: pointer;
-
-      &:last-of-type {
-        border-right: none;
-      }
-
-      &.active {
-        background-color: var(--color-c3);
-        color: var(--color-white);
-      }
-
-      &:hover:not(.active) {
-        background-color: var(--color-g1);
-      }
-    }
   }
 </style>

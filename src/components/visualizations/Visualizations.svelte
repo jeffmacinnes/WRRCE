@@ -5,6 +5,7 @@
 
   import Map from "$components/visualizations/Map/Map.svelte";
   import SplitBar from "$components/visualizations/SplitBar/SplitBar.svelte";
+  import Heatmap from "$components/visualizations/Heatmap/Heatmap.svelte";
   import VizTest from "./VizTest.svelte";
 
   const viewOpts = [
@@ -21,14 +22,14 @@
       icon: "clipboard"
     },
     {
-      cmp: VizTest,
+      cmp: Heatmap,
       title: "Temporal Trends in Recommendations",
       props: { color: "#3E3D81", name: "Viz 3" },
       icon: "calendar"
     }
   ];
 
-  let currentViewIdx = 1;
+  let currentViewIdx = 2;
 </script>
 
 <div class="visualization-container">
@@ -78,7 +79,7 @@
     width: 100%;
     padding: 50px;
     min-height: 900px;
-    background-color: var(--color-g1);
+    background-color: var(--color-white);
   }
 
   .view-container {
