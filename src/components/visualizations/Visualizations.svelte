@@ -36,7 +36,7 @@
   <div class="view-container">
     {#key currentViewIdx}
       <div
-        class="current-view-wrapper shadow"
+        class="current-view-wrapper"
         in:fly={{ delay: 500, x: 500, duration: 500 }}
         out:fly={{ duration: 500, x: -500 }}
       >
@@ -95,7 +95,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
+    // border-radius: 15px;
     overflow: hidden;
 
     .title {
@@ -103,10 +103,12 @@
       top: 0px;
       left: 0px;
       padding: 8px;
-      border-radius: 5px 5px 0px 0px;
       text-align: center;
-      color: white;
-      background: var(--color-c4);
+      color: var(--color-g4);
+
+      h4 {
+        font-weight: 800;
+      }
     }
   }
 

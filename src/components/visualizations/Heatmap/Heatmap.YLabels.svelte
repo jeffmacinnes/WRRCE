@@ -32,9 +32,6 @@
     line-height: 1;
     color: var(--color-g3);
 
-    // transform-origin: 100% 0%;
-    // transform: translate(0, 10px) rotate(-45deg);
-
     // border: solid 1px red;
   }
 </style>
