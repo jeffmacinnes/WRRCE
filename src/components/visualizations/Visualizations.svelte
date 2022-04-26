@@ -107,7 +107,10 @@
       color: var(--color-g4);
 
       h4 {
-        font-weight: 800;
+        font-size: 20px;
+        line-height: 24px;
+        letter-spacing: 1.5%;
+        font-weight: 700;
       }
     }
   }

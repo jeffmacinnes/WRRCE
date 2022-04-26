@@ -10,16 +10,12 @@
     <CurrentFilters />
   </div>
 
+  <div class="filter-panel">
+    <FiltersPanel />
+  </div>
   <div class="bg">
-    <div class="filter-panel">
-      <FiltersPanel />
-    </div>
-
     <Visualizations />
-
-    <div class="table-container">
-      <h1>TABLE GOES HERE</h1>
-    </div>
+    <Table />
   </div>
 </section>
 
@@ -31,11 +27,13 @@
   .explore-container {
     position: relative;
     height: 100%;
-    background: var(--3);
+    width: 100%;
+    background-color: var(--color-white);
   }
 
   .fg {
     position: sticky;
+    width: 100%;
     top: 100px;
     z-index: 10;
   }
@@ -44,20 +42,17 @@
     position: relative;
     width: 100%;
     height: 100%;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .filter-panel {
     position: sticky;
     top: 150px;
     overscroll-behavior: contain;
-    z-index: 1;
-  }
-
-  .table-container {
-    height: 900px;
-    background-color: var(--color-c2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    z-index: 2;
   }
 </style>
