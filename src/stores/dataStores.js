@@ -1,7 +1,8 @@
+import Fuse from "fuse.js";
 import { derived, readable, writable } from "svelte/store";
 import siteData from "$data/processed/combinedData.csv";
 import { filterOptions } from "$data/filterOptions";
-import Fuse from "fuse.js";
+import { color } from "$data/variables.json";
 
 export const showFilters = writable(false);
 export const searchKeyword = writable("");
@@ -9,17 +10,63 @@ export const filterOpts = writable(filterOptions);
 export const fullData = readable([], (set) => set(parseData(siteData)));
 export const rawDataCount = writable(siteData.length);
 
+const actionOpts = filterOptions
+  .find((d) => d.name === "action")
+  .opts.map((d) => ({ ...d, display: d.display.replace(/[0-9]\s-\s/g, "") }));
+const precisionOpts = filterOptions
+  .find((d) => d.name === "precision")
+  .opts.map((d) => ({ ...d, display: d.display.replace(/[0-9]\s-\s/g, "") }));
+
+const complianceLevels = [
+  "nomention",
+  "inaction",
+  "consideration",
+  "delegation",
+  "execution",
+  "compliance"
+];
+
+const getComplianceDisplay = (data) => {
+  // convert the compliance levels into svg code
+  let circleW = 20;
+  let r = (circleW * 0.83) / 2;
+  let result = [
+    `<svg viewBox="0 0 ${circleW * complianceLevels.length} ${circleW}" width="${
+      circleW * complianceLevels.length
+    }" height="${circleW}" xmlns="http://www.w3.org/2000/svg">`
+  ];
+  complianceLevels.forEach((level, i) => {
+    result.push(
+      `<circle cx="${i * circleW + circleW / 2}" cy="${circleW / 2}" r="${r}" fill="${
+        color.white
+      }" stroke="${color.a1}" stroke-width="2"/>`
+    );
+    if ([1, 333].includes(+data[level])) {
+      result.push(
+        `<circle cx="${i * circleW + circleW / 2}" cy="${circleW / 2}" r="${r * 1}" fill="${
+          color.a1
+        }"/>`
+      );
+    }
+  });
+  result.push("</svg>");
+  return result.join("");
+};
+
 function parseData(siteData) {
   return siteData.map((d) => ({
     ...d,
     action: +d.action,
+    actionDisplay: actionOpts.find((dd) => dd.name === +d.action).display,
     precision: +d.precision,
+    precisionDisplay: precisionOpts.find((dd) => dd.name === +d.precision).display,
     nomention: +d.nomention,
     inaction: +d.inaction,
     consideration: +d.consideration,
     delegation: +d.delegation,
     execution: +d.execution,
     compliance: +d.compliance,
+    complianceStatus: getComplianceDisplay(d),
     vaw: d.vaw === "true",
     econ: d.econ === "true",
     year: +d.year
