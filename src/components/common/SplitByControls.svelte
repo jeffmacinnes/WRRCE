@@ -6,7 +6,7 @@
 </script>
 
 <div class="split-controls-container">
-  Tally Recommendations By
+  Tally Recommendations By:
   <div class="split-var-container">
     {#each ["Compliance Status", "Action", "Precision"] as splitVarOpt, i}
       <div
@@ -30,9 +30,7 @@
 
   .split-var-container {
     display: flex;
-    margin: 20px;
-    border-radius: 8px;
-    border: solid 2px var(--color-g3);
+    margin: 10px;
     overflow: hidden;
     text-transform: uppercase;
     color: var(--color-g4);
@@ -50,8 +48,8 @@
       }
 
       &.active {
-        background-color: var(--color-c3);
-        color: var(--color-white);
+        color: var(--color-c4);
+        font-weight: 700;
       }
 
       &:hover:not(.active) {

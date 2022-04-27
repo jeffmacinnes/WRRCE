@@ -7,13 +7,33 @@
   let isOpen = false;
   let { country, institution, year, complianceStatus, actionDisplay, precisionDisplay } = data;
 
+  let expandedFields = {
+    minor: [{ key: "id", display: "id" }],
+    major: [
+      { key: "institutionDisplay", display: "institution" },
+      { key: "recommendation", display: "recommendation" }
+    ]
+  };
+
   // --- Debugging ---
   // $: console.log("here", actionOpts);
 </script>
 
 <!-- Fixed Row -->
 <tr class="fixed-row" class:collapsed={isOpen}>
-  <td class="expand-button" on:click={() => (isOpen = !isOpen)}>{isOpen ? "-" : "+"}</td>
+  <td class="expand-button" aria-expanded={isOpen} on:click={() => (isOpen = !isOpen)}>
+    <svg
+      style="tran"
+      width="15"
+      height="15"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="3"
+      viewBox="0 0 24 24"
+      stroke="currentColor"><path d="M9 5l7 7-7 7" /></svg
+    ></td
+  >
   <td>{country}</td>
   <td>{institution}</td>
   <td>{year}</td>
@@ -26,10 +46,27 @@
 {#if isOpen}
   <tr class="expanded-row">
     <td />
-    <td colspan="6">
-      <div class="expanded-content-container" transition:slide={{ duration: 300 }} />
+    <td colspan="1">
+      <div class="expanded-content-container minor" transition:slide={{ duration: 300 }}>
+        {#each expandedFields["minor"] as item}
+          <div>
+            <div class="field-type">{item.display}</div>
+            <div class="field-content">{data[item.key]}</div>
+          </div>
+        {/each}
+      </div>
     </td>
-  </tr>
+    <td colspan="5">
+      <div class="expanded-content-container major" transition:slide={{ duration: 300 }}>
+        {#each expandedFields["major"] as item}
+          <div>
+            <div class="field-type">{item.display}</div>
+            <div class="field-content">{data[item.key]}</div>
+          </div>
+        {/each}
+      </div>
+    </td></tr
+  >
 {/if}
 
 <style lang="scss">
@@ -44,6 +81,12 @@
     vertical-align: middle;
   }
 
+  .expanded-row {
+    td {
+      vertical-align: top;
+    }
+  }
+
   .fixed-row {
     // border: solid 1px red;
   }
@@ -54,8 +97,28 @@
 
   .expanded-content-container {
     width: 100%;
-    height: 300px;
-    background: purple;
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    text-transform: none;
+
+    &.minor {
+      max-width: 150px;
+    }
+
+    &.major {
+      max-width: 700px;
+    }
+  }
+
+  .field-type {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-g4);
   }
 
   .expand-button {
@@ -71,6 +134,14 @@
     //   transform: translate(0, -50%);
     //   content: "+";
     // }
+  }
+
+  svg {
+    transition: transform 0.2s ease-in;
+  }
+
+  [aria-expanded="true"] svg {
+    transform: rotate(0.25turn);
   }
 
   .compliance-status {

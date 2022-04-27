@@ -1,7 +1,8 @@
 <script>
   import { filteredData, rawDataCount, activeFilters } from "$stores/dataStores.js";
 
-  import TableRow from "./TableRow.svelte";
+  import Lazy from "$components/common/Lazy.svelte";
+  // import TableRow from "./TableRow.svelte";
 
   let tableVars = [
     { name: "country" },
@@ -28,7 +29,7 @@
     <div class="count-label body-rg">{@html countText}</div>
   </div>
 
-  <div class="table-container">
+  <div id="data-table" class="table-container">
     <table class="table">
       <!-- HEADER -->
       <thead class="header">
@@ -43,7 +44,12 @@
       <!-- BODY -->
       <tbody>
         {#each $filteredData as entry, i (entry.id)}
-          <TableRow idx={i} data={entry} />
+          <Lazy this={() => import("./TableRow.svelte")}>
+            <div slot="loading">Loading...</div>
+            <svelte:fragment slot="component" let:TableRow>
+              <TableRow idx={i} data={entry} />
+            </svelte:fragment>
+          </Lazy>
         {/each}
       </tbody>
     </table>

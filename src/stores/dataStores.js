@@ -3,6 +3,7 @@ import { derived, readable, writable } from "svelte/store";
 import siteData from "$data/processed/combinedData.csv";
 import { filterOptions } from "$data/filterOptions";
 import { color } from "$data/variables.json";
+import { filter } from "lodash";
 
 export const showFilters = writable(false);
 export const searchKeyword = writable("");
@@ -53,9 +54,16 @@ const getComplianceDisplay = (data) => {
   return result.join("");
 };
 
+const getInstitutionDisplay = (inst) => {
+  // return the full display name for the institution
+  return filterOptions.find((d) => d.name === "institution").opts.find((d) => d.name === inst)
+    .display;
+};
+
 function parseData(siteData) {
   return siteData.map((d) => ({
     ...d,
+    institutionDisplay: getInstitutionDisplay(d.institution),
     action: +d.action,
     actionDisplay: actionOpts.find((dd) => dd.name === +d.action).display,
     precision: +d.precision,
@@ -69,7 +77,8 @@ function parseData(siteData) {
     complianceStatus: getComplianceDisplay(d),
     vaw: d.vaw === "true",
     econ: d.econ === "true",
-    year: +d.year
+    year: +d.year,
+    recommendation: d.recommendation.charAt(0).toUpperCase() + d.recommendation.substring(1)
   }));
 }
 

@@ -75,9 +75,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 30px;
     width: 100%;
     padding: 50px;
+    margin-bottom: 50px;
     min-height: 900px;
     background-color: var(--color-white);
   }
