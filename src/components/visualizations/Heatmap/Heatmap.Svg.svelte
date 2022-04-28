@@ -4,13 +4,15 @@
   import { color } from "$data/variables.json";
   import ColorContrastChecker from "color-contrast-checker";
 
+  export let colorScale;
+
   let ccc = new ColorContrastChecker();
 
   const { data, width, height, xScale, yScale, yRange } = getContext("LayerCake");
 
-  $: colorScale = scaleLinear()
-    .domain(extent($data, (d) => d.nRecs))
-    .range([color.white, color.a1]);
+  // $: colorScale = scaleLinear()
+  //   .domain(extent($data, (d) => d.nRecs))
+  //   .range([color.white, color.a1]);
 
   $: yTicks = $yScale.domain();
 </script>

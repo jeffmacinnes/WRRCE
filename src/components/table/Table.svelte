@@ -24,27 +24,21 @@
 
   $: title = $activeFilters.length === 0 ? "Recommendations" : "Filtered Recommendations";
 
-  // -- Infinite Scroll Parameters
+  // -- Infinite Scroll for efficient loading of the table --
   let tableScrollWrapper;
   let rowList = [];
   let newRows = [];
   let batchSize = 50; // how many rows to get at once;
   let rowIdx = 0;
 
-  // $: rowList = [...rowList, ...newRows];
-
   const fetchRows = () => {
-    console.log(`fetching ${rowIdx} through ${rowIdx + batchSize}...`);
+    // console.log(`fetching ${rowIdx} through ${rowIdx + batchSize}...`);
     newRows = $filteredData.slice(rowIdx, rowIdx + batchSize);
     rowIdx += batchSize;
-
     rowList = [...rowList, ...newRows];
-
-    console.log("here", newRows, rowList);
   };
 
   const reset = () => {
-    console.log("resetting...");
     rowList = [];
     newRows = [];
     rowIdx = 0;
@@ -52,7 +46,6 @@
   };
 
   $: $filteredData, reset();
-  $: console.log("rowList", rowList);
 
   onMount(() => {
     fetchRows();

@@ -1,13 +1,15 @@
 <script>
   import { LayerCake, Svg, Html } from "layercake";
-  import { flatRollup, groups, ascending, scaleBand } from "d3";
+  import { flatRollup, extent, ascending, scaleBand, scaleLinear } from "d3";
   import { getYearlyRecsBySplit } from "./utils";
   import { filterOpts, filteredData } from "$stores/dataStores";
+  import { color } from "$data/variables.json";
 
   import HistogramSvg from "./Histogram.Svg.svelte";
   import HeatmapSvg from "./Heatmap.Svg.svelte";
   import HeatmapYLabels from "./Heatmap.YLabels.svelte";
   import HeatmapXLabels from "./Heatmap.XLabels.svelte";
+  import Legend from "$components/common/Legend.svelte";
   import SplitByControls from "$components/common/SplitByControls.svelte";
 
   // --- Shared Vis Props
@@ -33,6 +35,11 @@
     .sort((a, b) => ascending(a.year, b.year));
 
   $: heatData = getYearlyRecsBySplit($filteredData, years, splitBy);
+
+  // --- Legend, colorScale
+  $: colorScale = scaleLinear()
+    .domain(extent(heatData, (d) => d.nRecs))
+    .range([color.white, color.a1]);
 
   // ---- DEBUGGING ----
   // $: console.log("years", years);
@@ -74,11 +81,11 @@
         <HeatmapYLabels />
       </Html>
       <Svg>
-        <HeatmapSvg />
+        <HeatmapSvg {colorScale} />
       </Svg>
     </LayerCake>
   </div>
-
+  <Legend {colorScale} width={500} height={60} nTicks={6} title="# of Recommendations" />
   <SplitByControls currentSplitVar={splitBy} on:setSplitVar={handleSetSplitBy} />
 </div>
 
@@ -108,6 +115,6 @@
     // border: solid 1px red;
     width: 100%;
     height: 100%;
-    margin-bottom: 100px;
+    margin-bottom: 10px;
   }
 </style>

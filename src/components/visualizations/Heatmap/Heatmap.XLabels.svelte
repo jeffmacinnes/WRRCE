@@ -28,10 +28,11 @@
   .x-tick-label {
     position: absolute;
     text-align: center;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 700;
     text-transform: uppercase;
     line-height: 1;
-    color: var(--color-g3);
+    color: var(--color-g4);
 
     // transform-origin: 100% 0%;
     // transform: translate(0, 10px) rotate(-45deg);

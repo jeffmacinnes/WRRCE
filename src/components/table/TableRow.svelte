@@ -95,6 +95,7 @@
   .expanded-content-container {
     width: 100%;
     margin: 10px 0px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

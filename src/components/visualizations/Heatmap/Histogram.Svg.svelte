@@ -65,8 +65,11 @@
     class="axis-label"
     text-anchor="start"
     transform={`translate(${$xRange[1] + 8}, ${$yScale(yTickVals.at(-1)) + 15})`}
-    dominant-baseline="middle">Recommendations</text
+    dominant-baseline="middle"
   >
+    <tspan dy={0}>Yearly</tspan>
+    <tspan x={0} dy={15}>Recommendations</tspan>
+  </text>
 </g>
 
 <!-- 0 - line -->
@@ -84,12 +87,12 @@
 
 <!-- Title -->
 <g>
-  <text
+  <!-- <text
     class="title"
     text-anchor="start"
     transform={`translate(${$xRange[0]}, 0)`}
     dominant-baseline="middle">Total Recommendations By Year</text
-  >
+  > -->
 </g>
 
 <style>
@@ -118,6 +121,6 @@
     font-size: 10px;
     text-transform: uppercase;
     stroke: none;
-    fill: var(--color-g3);
+    fill: var(--color-g5);
   }
 </style>
