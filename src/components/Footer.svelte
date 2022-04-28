@@ -9,7 +9,7 @@
   footer {
     position: relative;
     bottom: 0;
-    z-index: 1;
+    z-index: 100;
     height: 250px;
     display: flex;
     justify-content: center;
