@@ -1,8 +1,9 @@
 <script>
+  import { onMount } from "svelte";
   import { filteredData, rawDataCount, activeFilters } from "$stores/dataStores.js";
 
-  import Lazy from "$components/common/Lazy.svelte";
-  // import TableRow from "./TableRow.svelte";
+  import InfiniteScroll from "$components/helpers/InfiniteScroll.svelte";
+  import TableRow from "./TableRow.svelte";
 
   let tableVars = [
     { name: "country" },
@@ -10,7 +11,8 @@
     { name: "year" },
     { name: "compliance status" },
     { name: "action" },
-    { name: "precision" }
+    { name: "precision" },
+    { name: "#" }
   ];
 
   $: countText =
@@ -21,6 +23,40 @@
         )}</b> out of <b>${$rawDataCount.toLocaleString("en-US")}</b> total recommendations`;
 
   $: title = $activeFilters.length === 0 ? "Recommendations" : "Filtered Recommendations";
+
+  // -- Infinite Scroll Parameters
+  let tableScrollWrapper;
+  let rowList = [];
+  let newRows = [];
+  let batchSize = 50; // how many rows to get at once;
+  let rowIdx = 0;
+
+  // $: rowList = [...rowList, ...newRows];
+
+  const fetchRows = () => {
+    console.log(`fetching ${rowIdx} through ${rowIdx + batchSize}...`);
+    newRows = $filteredData.slice(rowIdx, rowIdx + batchSize);
+    rowIdx += batchSize;
+
+    rowList = [...rowList, ...newRows];
+
+    console.log("here", newRows, rowList);
+  };
+
+  const reset = () => {
+    console.log("resetting...");
+    rowList = [];
+    newRows = [];
+    rowIdx = 0;
+    fetchRows();
+  };
+
+  $: $filteredData, reset();
+  $: console.log("rowList", rowList);
+
+  onMount(() => {
+    fetchRows();
+  });
 </script>
 
 <div class="table-section shadow">
@@ -29,7 +65,7 @@
     <div class="count-label body-rg">{@html countText}</div>
   </div>
 
-  <div id="data-table" class="table-container">
+  <div bind:this={tableScrollWrapper} class="table-container">
     <table class="table">
       <!-- HEADER -->
       <thead class="header">
@@ -43,14 +79,15 @@
 
       <!-- BODY -->
       <tbody>
-        {#each $filteredData as entry, i (entry.id)}
-          <Lazy this={() => import("./TableRow.svelte")}>
-            <div slot="loading">Loading...</div>
-            <svelte:fragment slot="component" let:TableRow>
-              <TableRow idx={i} data={entry} />
-            </svelte:fragment>
-          </Lazy>
+        {#each rowList as entry, i (entry.id)}
+          <TableRow idx={i} data={entry} />
         {/each}
+        <InfiniteScroll
+          elementScroll={tableScrollWrapper}
+          hasMore={newRows.length}
+          threshold={100}
+          on:loadMore={() => fetchRows()}
+        />
       </tbody>
     </table>
   </div>
@@ -99,7 +136,7 @@
   }
 
   .table-container {
-    overflow: auto;
+    overflow: auto; // Scroll events are on div, not table
     height: 90%;
     max-height: 900px;
   }
@@ -127,6 +164,7 @@
 
       &:last-of-type {
         border-right: none;
+        text-align: center;
       }
     }
 
@@ -137,7 +175,6 @@
 
   tbody {
     max-height: 500px;
-    overflow-y: auto;
   }
 
   div::-webkit-scrollbar {

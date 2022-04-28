@@ -87,7 +87,7 @@
   <text
     class="title"
     text-anchor="start"
-    transform={`translate(${$xRange[0]}, 10)`}
+    transform={`translate(${$xRange[0]}, 0)`}
     dominant-baseline="middle">Total Recommendations By Year</text
   >
 </g>

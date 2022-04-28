@@ -43,7 +43,7 @@
   <!-- HISTOGRAM OF TOTALS BY YEAR -->
   <div class="histogram-container">
     <LayerCake
-      padding={{ ...padding, bottom: 0, top: 30 }}
+      padding={{ ...padding, bottom: 0, top: 20 }}
       data={histData}
       x="year"
       y="nRecs"

@@ -16,6 +16,9 @@
       >
         {splitVarOpt}
       </div>
+      {#if i < 2}
+        <div class="divider" />
+      {/if}
     {/each}
   </div>
 </div>
@@ -36,11 +39,12 @@
     color: var(--color-g4);
 
     .split-var {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-right: solid 1px var(--color-g3);
-      padding: 5px 10px;
+      display: inline-block;
+      position: relative;
+      // display: flex;
+      // justify-content: center;
+      // align-items: center;
+      margin: 5px 10px;
       cursor: pointer;
 
       &:last-of-type {
@@ -52,9 +56,27 @@
         font-weight: 700;
       }
 
-      &:hover:not(.active) {
-        background-color: var(--color-g1);
+      &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background: var(--color-c4);
+        transform-origin: bottom left;
       }
+
+      &:hover:after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+        transition: transform 0.25s ease-out;
+      }
+    }
+
+    .divider {
+      border-right: solid 1px var(--color-g3);
     }
   }
 </style>

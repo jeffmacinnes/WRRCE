@@ -20,7 +20,7 @@
 </script>
 
 <!-- Fixed Row -->
-<tr class="fixed-row" class:collapsed={isOpen}>
+<tr class="fixed-row" class:expanded={isOpen}>
   <td class="expand-button" aria-expanded={isOpen} on:click={() => (isOpen = !isOpen)}>
     <svg
       style="tran"
@@ -40,6 +40,7 @@
   <td class="compliance-status">{@html complianceStatus}</td>
   <td>{actionDisplay}</td>
   <td>{precisionDisplay}</td>
+  <td class="index">{idx + 1}</td>
 </tr>
 
 <!-- Expanded Row -->
@@ -56,7 +57,7 @@
         {/each}
       </div>
     </td>
-    <td colspan="5">
+    <td colspan="6">
       <div class="expanded-content-container major" transition:slide={{ duration: 300 }}>
         {#each expandedFields["major"] as item}
           <div>
@@ -75,6 +76,10 @@
     border-bottom: solid 1px var(--color-c3);
     font-size: 14px;
     text-transform: uppercase;
+
+    &.expanded {
+      border-bottom: solid 1px var(--color-g2);
+    }
   }
 
   td {
@@ -86,14 +91,6 @@
       vertical-align: top;
     }
   }
-
-  .fixed-row {
-    // border: solid 1px red;
-  }
-
-  // .expanded-row {
-  //   border: solid 1px blue;
-  // }
 
   .expanded-content-container {
     width: 100%;
@@ -126,14 +123,6 @@
     cursor: pointer;
     font-size: 20px;
     text-align: center;
-
-    // &:after {
-    //   position: absolute;
-    //   left: 0.75rem;
-    //   top: 50%;
-    //   transform: translate(0, -50%);
-    //   content: "+";
-    // }
   }
 
   svg {
@@ -148,5 +137,12 @@
     font-size: 20px;
     vertical-align: middle;
     color: var(--color-a1);
+  }
+
+  .index {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-g3);
   }
 </style>
