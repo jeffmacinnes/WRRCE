@@ -49,7 +49,7 @@
     <div class="spacer" />
     <h1>Methods</h1>
     <div class="codebook-container">
-      <CTA icon="file-text" text="Codebook and Methodolgy" iconFirst={true} color={color.c4} />
+      <CTA icon="file-text" text="Codebook and Methodology" iconFirst={true} color={color.c4} />
       <i
         >Download the codebook for detailed information and sample coding rubrics for all of our
         coding</i
