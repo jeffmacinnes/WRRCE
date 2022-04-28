@@ -64,7 +64,7 @@
 
   .container {
     width: 100%;
-    max-width: 1600px;
+    max-width: 1200px;
     padding: 50px;
     display: flex;
     justify-content: space-between;
