@@ -3,6 +3,7 @@
   import { color } from "$data/variables.json";
 
   import Logo from "$assets/WRRCE_logo_gray.svg";
+  import JMLogo from "$assets/JMLogo.png";
   import CTA from "$components/common/CTA.svelte";
 </script>
 
@@ -44,7 +45,14 @@
       </div>
     </div>
     <div class="col col-3">
-      <h1>col 3</h1>
+      <a class="link contact" href="mailto:womensrights.recommendations@gmail.com">Contact Us</a>
+      <div>Copyright Ⓒ {new Date().getFullYear()}. All Rights Reserved</div>
+      <a href="https://www.jeffmacinnes.com"
+        ><div class="jm-logo">
+          Site Design:
+          <img src={JMLogo} alt="test" />
+        </div>
+      </a>
     </div>
   </div>
 </footer>
@@ -66,6 +74,7 @@
     width: 100%;
     max-width: 1200px;
     padding: 50px;
+    padding-bottom: 100px;
     display: flex;
     justify-content: space-between;
 
@@ -102,8 +111,22 @@
     cursor: pointer;
   }
 
+  .jm-logo {
+    cursor: pointer;
+    // text-transform: uppercase;
+    font-size: 16px;
+
+    * {
+      margin-top: 5px;
+    }
+  }
+
   .col-2 {
     padding-left: 20px;
     border-left: solid 1px var(--color-c1);
+  }
+
+  .contact {
+    font-size: 18px;
   }
 </style>

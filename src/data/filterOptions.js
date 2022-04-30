@@ -62,5 +62,12 @@ export const filterOptions = [
       { name: 2, display: "2 - Guided" },
       { name: 3, display: "3 - Directive" }
     ]
+  },
+  {
+    name: "year",
+    display: "Year",
+    opts: Array(13)
+      .fill(2007)
+      .map((d, i) => ({ name: 2007 + i, display: `${2007 + i}` }))
   }
 ].map((d) => ({ ...d, isOpen: false, opts: d.opts.map((opt) => ({ ...opt, isSelected: false })) }));

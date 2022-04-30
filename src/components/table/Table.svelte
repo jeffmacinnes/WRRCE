@@ -92,8 +92,8 @@
     height: 100%;
     width: 90vw;
     min-height: 900px;
-    border-radius: 10px;
-    background-color: var(--color-c2);
+    border-radius: 5px;
+    background-color: var(--color-c4);
     padding: 10px 50px;
   }
 
@@ -118,7 +118,7 @@
     width: 100%;
     height: 25px;
     margin-bottom: 5px;
-    background-color: var(--color-c2);
+    background-color: var(--color-c4);
     color: var(--color-white);
     position: sticky;
     top: 0;
@@ -151,9 +151,10 @@
       line-height: 24px;
       letter-spacing: -0.005em;
       text-transform: uppercase;
-      background-color: var(--color-c4);
+      background: var(--color-c4);
       color: var(--color-white);
-      border-right: solid 1px white;
+      /* border isn't sticky, so have to do this craziness to get "border": */
+      background: linear-gradient(to left, #fff 1px, var(--color-c4) 1px, var(--color-c4));
 
       &:last-of-type {
         border-right: none;

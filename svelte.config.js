@@ -3,6 +3,7 @@ import path from "path";
 import adapterStatic from "@sveltejs/adapter-static";
 // import svg from "vite-plugin-svgstring";
 import svg from "@poppanator/sveltekit-svg";
+import { imagetools } from "vite-imagetools";
 import dsv from "@rollup/plugin-dsv";
 import sveltePreprocess from "svelte-preprocess";
 import autoprefixer from "autoprefixer";
@@ -36,7 +37,7 @@ const config = {
           $utils: path.resolve("./src/utils")
         }
       },
-      plugins: [dsv(), svg()],
+      plugins: [dsv(), svg(), imagetools({ force: true })],
       ssr: {
         noExternal: dev ? [] : ["lodash", "gsap"]
       }

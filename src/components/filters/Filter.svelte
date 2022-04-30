@@ -1,16 +1,53 @@
 <script>
   import { slide } from "svelte/transition";
+  import { extent } from "d3-array";
+
+  import Checkbox from "$components/common/Checkbox.svelte";
+  import RangeSelector from "$components/common/RangeSelector.svelte";
 
   export let name;
   export let display;
   export let isOpen;
   export let opts;
   export let onToggle;
-  export let onOptUpdate;
+  export let onOptsUpdate;
 
   // -- calculate the type of filter it is
+  $: type = name === "year" ? "slider" : "checkbox";
+
   // -- calculate if any options are selected
   $: anySelected = opts.filter((opt) => opt.isSelected).length > 0;
+
+  const handleToggleCheckbox = (e) => {
+    let opt = opts.find((d) => d.name === e.detail.name);
+    onOptsUpdate(name, [opt], [!opt.isSelected]);
+  };
+
+  // --- Slider Specific Parameters ------
+  let sliderMin;
+  let sliderMax;
+  let sliderValues; // current values to set the slider at
+  $: if (type === "slider") {
+    let possibleValues = opts.map((d) => d.name);
+    [sliderMin, sliderMax] = extent(possibleValues);
+    let selectedVals = opts.filter((d) => d.isSelected).map((d) => d.name);
+    sliderValues = selectedVals.length === 0 ? [sliderMin, sliderMax] : extent(selectedVals);
+  }
+
+  const handleRangeUpdate = (e) => {
+    let newVals = e.detail.values;
+    if (JSON.stringify(newVals) === JSON.stringify([sliderMin, sliderMax])) {
+      // deselect all if slider is at min/max limits
+      onOptsUpdate(
+        name,
+        opts,
+        opts.map((d) => false)
+      );
+    } else {
+      let states = opts.map((opt) => opt.name >= newVals[0] && opt.name <= newVals[1]);
+      onOptsUpdate(name, opts, states);
+    }
+  };
 </script>
 
 <!-- FILTER HEADER -->
@@ -37,20 +74,32 @@
 <!-- FILTER PANEL -->
 {#if isOpen}
   <div transition:slide={{ duration: 300 }} class="panel">
-    {#each opts as opt}
-      <div
-        class="checkbox-container body-rg"
-        class:checked={opt.isSelected}
-        on:click={() => onOptUpdate(name, opt, !opt.isSelected)}
-      >
-        <span class="checkmark" />
-        {opt.display}
-      </div>
-    {/each}
+    <!--  CHECKBOX -->
+    {#if type === "checkbox"}
+      {#each opts as opt}
+        <Checkbox
+          name={opt.name}
+          display={opt.display}
+          isSelected={opt.isSelected}
+          on:toggleCheckbox={handleToggleCheckbox}
+        />
+      {/each}
+    {:else if type === "slider"}
+      <RangeSelector
+        min={sliderMin}
+        max={sliderMax}
+        values={sliderValues}
+        on:updateSliderValues={handleRangeUpdate}
+      />
+    {/if}
   </div>
 {/if}
 
 <style lang="scss">
+  .divider {
+    height: 30px;
+  }
+
   .panel {
     max-height: 400px;
     overflow-y: auto;
@@ -97,48 +146,5 @@
 
   [aria-expanded="true"] svg {
     transform: rotate(0.25turn);
-  }
-
-  .checkbox-container {
-    display: block;
-    position: relative;
-    margin: 7px 2px;
-    padding-left: 25px;
-    line-height: 1.33;
-    color: var(--color-g3);
-    cursor: pointer;
-    // border: solid 1px red;
-
-    &:hover {
-      opacity: 0.6;
-
-      // .checkmark {
-      //   background-color: var(--color-c1);
-      // }
-    }
-
-    // custom checkbox
-    .checkmark {
-      position: absolute;
-      top: 3px;
-      left: 0;
-      height: 15px;
-      width: 15px;
-      border-radius: 50%;
-      border: solid 1px var(--color-g3);
-      background-color: var(--color-white);
-    }
-
-    &.checked {
-      color: var(--color-c3);
-
-      .checkmark {
-        background-color: var(--color-c4);
-      }
-
-      &:hover {
-        opacity: 1;
-      }
-    }
   }
 </style>

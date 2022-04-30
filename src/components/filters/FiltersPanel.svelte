@@ -19,12 +19,16 @@
     });
   };
 
-  const updateFilterOpts = (filterName, opt, state) => {
+  const updateFilterOpts = (filterName, opts, states) => {
     // update the selected options for the specified filter
+    // `opts` should be array of `opt` objects with props for: name, display, isSelected
+    // `states` is the array of booleans you want to assign to isSelected for each opt
     filterOpts.update((store) => {
       let filterIdx = findFilterIdx(filterName);
-      let optIdx = store[filterIdx].opts.findIndex((d) => d.name === opt.name);
-      store[filterIdx].opts[optIdx] = { ...opt, isSelected: state };
+      opts.forEach((opt, i) => {
+        let optIdx = store[filterIdx].opts.findIndex((d) => d.name === opt.name);
+        store[filterIdx].opts[optIdx] = { ...opt, isSelected: states[i] };
+      });
       return store;
     });
   };
@@ -86,7 +90,7 @@
         {...filter}
         opts={filter.opts}
         onToggle={toggleFilter}
-        onOptUpdate={updateFilterOpts}
+        onOptsUpdate={updateFilterOpts}
       />
     {/each}
   </div>

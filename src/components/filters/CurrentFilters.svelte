@@ -21,8 +21,13 @@
       // reset the isSelected flag for the given filterOpt
       filterOpts.update((store) => {
         let filterIdx = store.findIndex((d) => d.name === filter.type);
-        let optIdx = store[filterIdx].opts.findIndex((opt) => opt.name === filter.opt);
-        store[filterIdx].opts[optIdx].isSelected = false;
+        if (filter.type === "year") {
+          // deselect ALL year opts
+          store[filterIdx].opts = store[filterIdx].opts.map((d) => ({ ...d, isSelected: false }));
+        } else {
+          let optIdx = store[filterIdx].opts.findIndex((opt) => opt.name === filter.opt);
+          store[filterIdx].opts[optIdx].isSelected = false;
+        }
         return store;
       });
     }

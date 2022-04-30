@@ -36,6 +36,7 @@
     "style-dictionary": "^3.1.1",
     "svelte": "^3.46.4",
     "svelte-preprocess": "^4.10.2",
+    "svelte-range-slider-pips": "^2.0.3",
     "title-case": "^3.0.3",
     "topojson-client": "^3.1.0",
     "vite-plugin-svgstring": "^1.0.0"
@@ -49,6 +50,7 @@
     "@portabletext/svelte": "^0.2.0",
     "color-contrast-checker": "^2.1.0",
     "fuse.js": "^6.5.3",
-    "textures": "^1.2.3"
+    "textures": "^1.2.3",
+    "vite-imagetools": "^4.0.3"
   }
 }

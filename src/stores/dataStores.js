@@ -3,7 +3,7 @@ import { derived, readable, writable } from "svelte/store";
 import siteData from "$data/processed/combinedData.csv";
 import { filterOptions } from "$data/filterOptions";
 import { color } from "$data/variables.json";
-import { filter } from "lodash";
+import { min, max } from "d3-array";
 
 export const showFilters = writable(false);
 export const searchKeyword = writable("");
@@ -125,6 +125,19 @@ export const activeFilters = derived(
         });
     });
 
+    // reformat the "years" filters
+    let yearFilters = filters.filter((d) => d.type === "year");
+    filters = filters.filter((d) => d.type !== "year");
+    if (yearFilters.length > 0) {
+      let years = yearFilters.map((d) => d.opt);
+      filters.push({
+        type: "year",
+        typeDisplay: "Year",
+        opt: [min(years), max(years)],
+        optDisplay: `${min(years)} to ${max(years)}`
+      });
+    }
+
     console.log("filters", filters);
     return filters;
   }
@@ -195,5 +208,13 @@ export const filteredData = derived([activeFilters], ([$activeFilters]) => {
     let precisions = precisionFilters.map((d) => d.opt);
     result = result.filter((d) => precisions.includes(d.precision));
   }
+
+  // year
+  const yearFilter = $activeFilters.filter((d) => d.type === "year");
+  if (yearFilter.length > 0) {
+    let yearLims = yearFilter[0].opt;
+    result = result.filter((d) => d.year >= yearLims[0] && d.year <= yearLims[1]);
+  }
+
   return result;
 });
