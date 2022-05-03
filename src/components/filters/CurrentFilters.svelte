@@ -9,6 +9,7 @@
   } from "$stores/dataStores.js";
   import CTA from "$components/common/CTA.svelte";
   import FilterPill from "$components/filters/FilterPill.svelte";
+  import { downloadData } from "$data/download";
 
   const toggleFiltersPanel = () => {
     showFilters.set(!$showFilters);
@@ -42,6 +43,7 @@
           "en-US"
         )}</b> total recommendations, filtered by:`;
   $: filterToggleText = $showFilters ? "Hide filters" : "Select filters";
+  $: downloadText = $activeFilters.length === 0 ? "Download Data" : "Download Filtered Data";
 </script>
 
 <div class="container shadow">
@@ -75,11 +77,12 @@
     <div class="download-container">
       <CTA
         icon="download"
-        text="download filtered"
+        text={downloadText}
         textClass="filters-cta"
         iconSize="1.3em"
         lineSize="1px"
         iconFirst={false}
+        onClick={() => downloadData($activeFilters.length > 0)}
       />
     </div>
   </div>

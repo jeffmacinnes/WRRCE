@@ -3,9 +3,9 @@ import csv from "csvtojson";
 import fastcsv from "fast-csv";
 import { titleCase } from "title-case";
 
-const CEDAW_fname = "20220205_CEDAW.csv";
-const ECtHR_fname = "20220407_ECtHR.csv";
-const UPR_fname = "20220205_UPR.csv";
+const CEDAW_fname = "20220502_CEDAW.csv";
+const ECtHR_fname = "20220502_ECtHR.csv";
+const UPR_fname = "20220502_UPR.csv";
 
 const rawDir = "src/data/raw";
 const commonVars = [

@@ -1,6 +1,7 @@
 <script>
   import { goto } from "$app/navigation";
   import { color } from "$data/variables.json";
+  import { downloadData } from "$data/download";
 
   import CTA from "$components/common/CTA.svelte";
   import LogoAnimation from "$components/LogoAnimation.svelte";
@@ -13,7 +14,13 @@
   <div class="text-container">
     <h2>{heading}</h2>
     <p class="body-lg">{@html body}</p>
-    <CTA icon="download" text="Download Dataset" iconFirst={true} color={color.c4} />
+    <CTA
+      icon="download"
+      text="Download Full Dataset"
+      iconFirst={true}
+      color={color.c4}
+      onClick={() => downloadData()}
+    />
   </div>
 
   <div class="animation-container">
