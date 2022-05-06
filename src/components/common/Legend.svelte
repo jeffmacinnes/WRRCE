@@ -12,7 +12,7 @@
   export let tickSize = 6;
   export let width = 320;
   export let height = 44 + tickSize;
-  export let margin = { top: 18, right: 0, bottom: 16 + tickSize, left: 0 };
+  export let margin = { top: 20, right: 20, bottom: 16 + tickSize, left: 20 };
   export let nTicks = width / 64;
 
   let x;
@@ -48,7 +48,7 @@
   });
 </script>
 
-<svg {width} {height} viewBox={`0 0 ${width} ${height}`}>
+<svg viewBox={`0 0 ${width} ${height}`}>
   <!-- <rect x={0} y={0} {width} {height} fill="red" opacity={0.2} /> -->
 
   <!-- COLOR SCALE -->
@@ -97,12 +97,13 @@
 
   .tick-label {
     fill: var(--color-g5);
+    font-size: 10px;
     font-weight: 500;
   }
 
   .title {
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 10px;
     font-weight: 500;
     fill: var(--color-g5);
   }

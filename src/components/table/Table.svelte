@@ -1,9 +1,10 @@
 <script>
   import { onMount } from "svelte";
-  import { filteredData, rawDataCount, activeFilters } from "$stores/dataStores.js";
+  import { filteredData, rawDataCount, activeFilters, sortBy } from "$stores/dataStores.js";
 
   import InfiniteScroll from "$components/helpers/InfiniteScroll.svelte";
   import TableRow from "./TableRow.svelte";
+  import SortBy from "./SortBy.svelte";
 
   let tableVars = [
     { name: "country" },
@@ -11,8 +12,7 @@
     { name: "year" },
     { name: "compliance status" },
     { name: "action" },
-    { name: "precision" },
-    { name: "#" }
+    { name: "precision" }
   ];
 
   $: countText =
@@ -50,6 +50,22 @@
   onMount(() => {
     fetchRows();
   });
+
+  // --- Sort By Options ---
+  const handleSortBy = (name) => {
+    let modes = ["none", "asc", "dsc"];
+    if (name === $sortBy.name) {
+      let modeIdx = modes.findIndex((d) => d === $sortBy.mode);
+      modeIdx++;
+      modeIdx = modeIdx === modes.length ? 0 : modeIdx;
+      let newMode = modes[modeIdx];
+      name = newMode === "none" ? null : name;
+      sortBy.set({ name, mode: modes[modeIdx] });
+    } else {
+      // if not a current sortBy, set it to the specified 'name' w/ ascending
+      sortBy.set({ name, mode: "asc" });
+    }
+  };
 </script>
 
 <div class="table-section shadow">
@@ -63,9 +79,17 @@
       <!-- HEADER -->
       <thead class="header">
         <tr>
-          <th class="header-item expander" />
+          <th class="expander" />
           {#each tableVars as th}
-            <th class="header-item">{th.name}</th>
+            <th
+              ><div class="header-item">
+                {th.name}<SortBy
+                  isActive={$sortBy.name === th.name}
+                  sortMode={$sortBy.mode}
+                  on:sortBy={() => handleSortBy(th.name)}
+                />
+              </div></th
+            >
           {/each}
         </tr>
       </thead>
@@ -73,7 +97,7 @@
       <!-- BODY -->
       <tbody>
         {#each rowList as entry, i (entry.id)}
-          <TableRow idx={i} data={entry} />
+          <TableRow data={entry} />
         {/each}
         <InfiniteScroll
           elementScroll={tableScrollWrapper}
@@ -160,6 +184,17 @@
         border-right: none;
         text-align: center;
       }
+
+      &:first-of-type {
+        border-right: none;
+        text-align: center;
+      }
+    }
+
+    .header-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .expander {

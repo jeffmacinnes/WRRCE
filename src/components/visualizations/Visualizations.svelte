@@ -6,30 +6,29 @@
   import Map from "$components/visualizations/Map/Map.svelte";
   import SplitBar from "$components/visualizations/SplitBar/SplitBar.svelte";
   import Heatmap from "$components/visualizations/Heatmap/Heatmap.svelte";
-  import VizTest from "./VizTest.svelte";
 
   const viewOpts = [
     {
       cmp: Map,
       title: "Regional Trends in Recommendations",
-      props: { color: "#529D8E", name: "Viz 1" },
+      props: {},
       icon: "globe"
     },
     {
       cmp: SplitBar,
       title: "Recommendations by Institution",
-      props: { color: "#D4B483", name: "Viz 2" },
+      props: {},
       icon: "clipboard"
     },
     {
       cmp: Heatmap,
       title: "Temporal Trends in Recommendations",
-      props: { color: "#3E3D81", name: "Viz 3" },
+      props: {},
       icon: "calendar"
     }
   ];
 
-  let currentViewIdx = 2;
+  let currentViewIdx = 0;
 </script>
 
 <div class="visualization-container">

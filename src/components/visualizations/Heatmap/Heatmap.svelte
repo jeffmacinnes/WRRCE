@@ -2,7 +2,7 @@
   import { LayerCake, Svg, Html } from "layercake";
   import { flatRollup, extent, ascending, scaleBand, scaleLinear } from "d3";
   import { getYearlyRecsBySplit } from "./utils";
-  import { filterOpts, filteredData } from "$stores/dataStores";
+  import { filterOpts, filteredData, activeFilters } from "$stores/dataStores";
   import { color } from "$data/variables.json";
 
   import HistogramSvg from "./Histogram.Svg.svelte";
@@ -13,7 +13,16 @@
   import SplitByControls from "$components/common/SplitByControls.svelte";
 
   // --- Shared Vis Props
-  const years = [...Array(13)].map((_, i) => 2007 + i);
+  let years;
+  $: {
+    if ($activeFilters.findIndex((d) => d.type === "year") !== -1) {
+      let yearLims = $activeFilters.find((d) => d.type === "year").opt;
+      years = [...Array(yearLims[1] - yearLims[0] + 1)].map((_, i) => yearLims[0] + i);
+    } else {
+      years = [...Array(10)].map((_, i) => 2007 + i);
+    }
+  }
+
   const padding = { top: 30, bottom: 30, left: 30, right: 150 };
   const xScale = scaleBand().paddingInner([0.1]).paddingOuter(0.1).round(true);
 
@@ -32,6 +41,7 @@
     (d) => d.year
   )
     .map((d) => ({ year: d[0], nRecs: d[1] }))
+    .filter((d) => years.includes(d.year))
     .sort((a, b) => ascending(a.year, b.year));
 
   $: heatData = getYearlyRecsBySplit($filteredData, years, splitBy);
@@ -85,7 +95,9 @@
       </Svg>
     </LayerCake>
   </div>
-  <Legend {colorScale} width={500} height={60} nTicks={6} title="# of Recommendations" />
+  <div style:width="500px" style:height="60px">
+    <Legend {colorScale} width={500} height={60} nTicks={6} title="# of Recommendations" />
+  </div>
   <SplitByControls currentSplitVar={splitBy} on:setSplitVar={handleSetSplitBy} />
 </div>
 
@@ -100,7 +112,6 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-
     background-color: white;
     overflow: hidden;
   }

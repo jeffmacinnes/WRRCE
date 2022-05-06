@@ -121,6 +121,21 @@ export function tooltip(element, params = {}) {
   element.addEventListener("mousemove", mouseMove);
 
   return {
+    update(params) {
+      // will run any time any of the input params change. Make it reactive
+      tooltipProps = params.props;
+
+      // clear old event listeners
+      element.removeEventListener("mouseover", mouseOver);
+      element.removeEventListener("mouseleave", mouseLeave);
+      element.removeEventListener("mousemove", mouseMove);
+
+      // add updated ones
+      element.addEventListener("mouseover", mouseOver);
+      element.addEventListener("mouseleave", mouseLeave);
+      element.addEventListener("mousemove", mouseMove);
+    },
+
     destroy() {
       element.removeEventListener("mouseover", mouseOver);
       element.removeEventListener("mouseleave", mouseLeave);

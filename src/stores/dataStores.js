@@ -3,13 +3,14 @@ import { derived, readable, writable } from "svelte/store";
 import siteData from "$data/processed/combinedData.csv";
 import { filterOptions } from "$data/filterOptions";
 import { color } from "$data/variables.json";
-import { min, max } from "d3-array";
+import { min, max, ascending, descending } from "d3-array";
 
 export const showFilters = writable(false);
 export const searchKeyword = writable("");
 export const filterOpts = writable(filterOptions);
 export const fullData = readable([], (set) => set(parseData(siteData)));
 export const rawDataCount = writable(siteData.length);
+export const sortBy = writable({ name: null, mode: null });
 
 const actionOpts = filterOptions
   .find((d) => d.name === "action")
@@ -19,16 +20,16 @@ const precisionOpts = filterOptions
   .opts.map((d) => ({ ...d, display: d.display.replace(/[0-9]\s-\s/g, "") }));
 
 const complianceLevels = [
-  "nomention",
-  "inaction",
-  "consideration",
-  "delegation",
-  "execution",
-  "compliance"
+  { level: "nomention", value: 1 },
+  { level: "inaction", value: 10 },
+  { level: "consideration", value: 100 },
+  { level: "delegation", value: 1000 },
+  { level: "execution", value: 10000 },
+  { level: "compliance", value: 100000 }
 ];
 
-const getComplianceDisplay = (data) => {
-  // convert the compliance levels into svg code
+const getComplianceDisplay = (rec) => {
+  // convert the compliance levels for this rec into svg code
   let circleW = 20;
   let r = (circleW * 0.83) / 2;
   let result = [
@@ -36,22 +37,45 @@ const getComplianceDisplay = (data) => {
       circleW * complianceLevels.length
     }" height="${circleW}" xmlns="http://www.w3.org/2000/svg">`
   ];
-  complianceLevels.forEach((level, i) => {
+
+  // set color
+  let complianceColor = color.g2;
+  complianceLevels.every(({ level }) => {
+    if ([1, 333].includes(+rec[level])) {
+      complianceColor = color.a1;
+      return false;
+    }
+    return true;
+  });
+
+  complianceLevels.forEach(({ level }, i) => {
     result.push(
       `<circle cx="${i * circleW + circleW / 2}" cy="${circleW / 2}" r="${r}" fill="${
         color.white
-      }" stroke="${color.a1}" stroke-width="2"/>`
+      }" stroke="${complianceColor}" stroke-width="2"/>`
     );
-    if ([1, 333].includes(+data[level])) {
+    if ([1, 333].includes(+rec[level])) {
       result.push(
-        `<circle cx="${i * circleW + circleW / 2}" cy="${circleW / 2}" r="${r * 1}" fill="${
-          color.a1
-        }"/>`
+        `<circle cx="${i * circleW + circleW / 2}" cy="${circleW / 2}" r="${
+          r * 0.75
+        }" fill="${complianceColor}"/>`
       );
     }
   });
   result.push("</svg>");
   return result.join("");
+};
+
+const getComplianceSum = (rec) => {
+  // return the sum of all compliance statuses for this rec, use for sorting purposes
+  let sum = 0;
+  complianceLevels.forEach(({ level, value }) => {
+    if ([1, 333].includes(+rec[level])) {
+      sum += value;
+    }
+  });
+  // return sum * -1; // invert so the first sort option -- ascending -- gives the highest values FIRST (more intuitive, I think)
+  return sum;
 };
 
 const getInstitutionDisplay = (inst) => {
@@ -61,8 +85,9 @@ const getInstitutionDisplay = (inst) => {
 };
 
 function parseData(siteData) {
-  return siteData.map((d) => ({
+  return siteData.map((d, i) => ({
     ...d,
+    idx: i,
     institutionDisplay: getInstitutionDisplay(d.institution),
     action: +d.action,
     actionDisplay: actionOpts.find((dd) => dd.name === +d.action).display,
@@ -75,6 +100,7 @@ function parseData(siteData) {
     execution: +d.execution,
     compliance: +d.compliance,
     complianceStatus: getComplianceDisplay(d),
+    complianceSum: getComplianceSum(d),
     vaw: d.vaw === "true",
     econ: d.econ === "true",
     year: +d.year,
@@ -144,9 +170,9 @@ export const activeFilters = derived(
 );
 
 // --- Filter the data based on currently selected filters
-export const filteredData = derived([activeFilters], ([$activeFilters]) => {
+export const filteredData = derived([activeFilters, sortBy], ([$activeFilters, $sortBy]) => {
   // if no filters, return raw data
-  if ($activeFilters.length === 0) return rawData;
+  //if ($activeFilters.length === 0) return rawData;
 
   // --- APPLY FILTERS
   let result = rawData;
@@ -214,6 +240,19 @@ export const filteredData = derived([activeFilters], ([$activeFilters]) => {
   if (yearFilter.length > 0) {
     let yearLims = yearFilter[0].opt;
     result = result.filter((d) => d.year >= yearLims[0] && d.year <= yearLims[1]);
+  }
+
+  // --- sort
+  if ($sortBy.name) {
+    let sortKey = $sortBy.name === "compliance status" ? "complianceSum" : $sortBy.name;
+
+    if ($sortBy.mode === "asc") {
+      result = result.sort((a, b) => ascending(a[sortKey], b[sortKey]));
+    } else if ($sortBy.mode === "dsc") {
+      result = result.sort((a, b) => descending(a[sortKey], b[sortKey]));
+    }
+  } else {
+    result = result.sort((a, b) => ascending(a.idx, b.idx));
   }
 
   return result;

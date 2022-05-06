@@ -1,13 +1,16 @@
 <script>
   import { LayerCake, Svg } from "layercake";
   import { feature } from "topojson-client";
-  import { flatRollup, rollup, max, greatest } from "d3";
+  import { flatRollup, rollup, greatest, scaleLinear } from "d3";
   import Icon from "$components/helpers/Icon.svelte";
 
   import { fullData, filteredData } from "$stores/dataStores";
   import countryGeo from "$data/countriesGeo.json";
+  import { color } from "$data/variables.json";
 
   import MapSvg from "./Map.Svg.svelte";
+  import Legend from "$components/common/Legend.svelte";
+  import NoDataSwatch from "$components/common/NoDataSwatch.svelte";
 
   // --- Map setup
   // convert to geojson
@@ -57,6 +60,7 @@
   $: fullMaxRecs = getMaxRecs($fullData);
   $: filteredMaxRecs = getMaxRecs($filteredData);
   $: maxRecs = scaleType === "absolute" ? fullMaxRecs : filteredMaxRecs;
+  $: colorScale = scaleLinear().domain([0, maxRecs]).range([color.white, color.a1]);
 
   let buttonSize = "25px";
 </script>
@@ -69,6 +73,7 @@
         countryData={countryRecCounts}
         bind:resetTranslation={resetMapTranslation}
         zoomLevel={zoom}
+        {colorScale}
         {maxRecs}
         on:mapIsTranslated={updateMapTranslationState}
       />
@@ -76,7 +81,8 @@
   </LayerCake>
 
   <div class="legend-controls">
-    <div>Legend and scale controls</div>
+    <Legend {colorScale} width={500} height={60} nTicks={4} title="# of Recommendations" />
+    <NoDataSwatch />
   </div>
 
   <div class="map-controls">
@@ -142,20 +148,20 @@
 
   .legend-controls {
     position: absolute;
-    width: 300px;
-    bottom: 50px;
+    width: 500px;
+    bottom: 10px;
     right: 150px;
-    height: 50px;
-    padding: 5px;
-    border-radius: 5px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+    align-items: flex-end;
     background-color: var(--color-white);
-    border: solid 2px var(--color-g2);
     text-align: center;
   }
 
   .map-controls {
     position: absolute;
-    bottom: 50px;
+    bottom: 10px;
     right: 50px;
     z-index: 1;
     display: flex;

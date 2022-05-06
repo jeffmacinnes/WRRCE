@@ -64,7 +64,7 @@
     <div class="current-filters-container">
       <div class="body-rg filter-count-label">{@html countText}</div>
       <div class="pills-container">
-        {#each $activeFilters as filter}
+        {#each $activeFilters as filter, i (`${filter.type}-${filter.opt}`)}
           <FilterPill
             title={filter.typeDisplay}
             name={filter.optDisplay}

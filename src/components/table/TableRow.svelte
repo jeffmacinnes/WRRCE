@@ -2,13 +2,16 @@
   import { slide } from "svelte/transition";
 
   export let data = {};
-  export let idx;
+  // export let idx;
 
   let isOpen = false;
   let { country, institution, year, complianceStatus, actionDisplay, precisionDisplay } = data;
 
   let expandedFields = {
-    minor: [{ key: "id", display: "id" }],
+    minor: [
+      { key: "id", display: "id" },
+      { key: "complianceSum", display: "sum" }
+    ],
     major: [
       { key: "institutionDisplay", display: "institution" },
       { key: "recommendation", display: "recommendation" }
@@ -40,7 +43,7 @@
   <td class="compliance-status">{@html complianceStatus}</td>
   <td>{actionDisplay}</td>
   <td>{precisionDisplay}</td>
-  <td class="index">{idx + 1}</td>
+  <!-- <td class="index">{idx + 1}</td> -->
 </tr>
 
 <!-- Expanded Row -->

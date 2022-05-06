@@ -11,7 +11,7 @@
   import MapTooltip from "$components/tooltips/MapTooltip.svelte";
 
   export let countryData;
-  export let maxRecs;
+  export let colorScale;
   export let zoomLevel = 1;
   export const resetTranslation = () => {
     translate = `translate(0, 0)`;
@@ -58,7 +58,6 @@
   // --- Fill Colors/Texture
   const landColor = "#e8e8e8";
   const texture = textures.lines().size(8).strokeWidth(1).stroke("#fff").background(landColor);
-  $: colorScale = d3.scaleSequential().range(["#e8e8e8", "#288983"]).domain([0, maxRecs]);
   const getColor = (ccode) => {
     // return  the color of the country with the given ccode
     if (["370", "347"].includes(ccode)) return texture.url(); // No data on Belarus (370) or Kosovo (347)
@@ -95,18 +94,20 @@
     d3.select(node).call(texture);
     d3.select(node).call(zoom);
   });
+
+  // --- DEBUG
 </script>
 
 <g bind:this={node} class="map-group" {transform}>
   <!-- Graticules -->
   <path class="graticule" fill="none" d={geoPathFn(geoGraticule10())} />
 
-  {#each features as feature, i (i)}
+  {#each features as feature (feature.id)}
     <!-- Country Outline -->
     <path
       use:tooltip={{
         component: MapTooltip,
-        props: { feature: feature }
+        props: { feature: feature, data: countryData, colorScale }
       }}
       class="feature-path"
       fill={getColor(feature.properties.ccode)}

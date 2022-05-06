@@ -24,11 +24,11 @@
       data-id={i}
       x={$xScale(d.year)}
       y={$yScale(d.display)}
-      rx={8}
+      rx={0}
       width={$xScale.bandwidth()}
       height={$yScale.bandwidth()}
       fill={colorScale(d.nRecs)}
-      stroke={color.g4}
+      stroke={color.white}
     />
     <!-- <circle
       cx={$xScale(d.year) + $xScale.bandwidth() / 2}
