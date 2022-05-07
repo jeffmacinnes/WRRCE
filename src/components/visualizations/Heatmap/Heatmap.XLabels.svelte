@@ -5,7 +5,7 @@
   $: xTicks = $xScale.domain();
 
   // --- DEBUG
-  $: console.log($xScale.domain());
+  // $: console.log($xScale.domain());
 </script>
 
 <div

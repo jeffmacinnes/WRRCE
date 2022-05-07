@@ -28,6 +28,8 @@
     .domain([0, max(bins, (d) => d.length)])
     .range([chartH, 0]);
 
+  $: validCountry = !["Belarus", "Kosovo"].includes(name);
+
   // --- debug
 </script>
 
@@ -37,7 +39,7 @@
       <div class="title">Country</div>
       <div class="value">{name}</div>
     </div>
-    {#if nRecs}
+    {#if validCountry}
       <div
         class="rec-count"
         style:background={colorScale(nRecs)}
