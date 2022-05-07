@@ -164,7 +164,7 @@ export const activeFilters = derived(
       });
     }
 
-    console.log("filters", filters);
+    // console.log("filters", filters);
     return filters;
   }
 );

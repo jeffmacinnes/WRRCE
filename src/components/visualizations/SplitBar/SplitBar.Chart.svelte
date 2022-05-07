@@ -16,7 +16,6 @@
   $: yTickVals = $yScale.ticks(3);
 
   //debugging;
-  // $: console.log("yTickVlas", yTickVals);
 </script>
 
 <!-- Y-Axes -->

@@ -10,7 +10,7 @@
 <!-- Y-Ticks -->
 <g class="axes">
   {#each yTickVals as yTick}
-    <line
+    <!-- <line
       class="x-axis"
       x1={$xRange[0]}
       x2={$xRange[1]}
@@ -19,7 +19,7 @@
       stroke-width={1}
       stroke-dasharray={3}
       opacity={yTick === 0 ? 0 : 1}
-    />
+    /> -->
     <line
       class="x-axis"
       x1={$xRange[0]}
@@ -28,8 +28,8 @@
       y2={$yScale(yTick)}
       stroke-width={1}
       stroke-dasharray={3}
-      opacity={yTick === 0 ? 0 : 1}
-      stroke={color.g2}
+      opacity={yTick === 0 ? 0 : 0.7}
+      stroke={color.g3}
     />
     <text
       class="tick-label"

@@ -91,7 +91,7 @@
         <HeatmapYLabels />
       </Html>
       <Svg>
-        <HeatmapSvg {colorScale} />
+        <HeatmapSvg {colorScale} {splitBy} />
       </Svg>
     </LayerCake>
   </div>

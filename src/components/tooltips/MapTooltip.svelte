@@ -10,12 +10,12 @@
   export let y;
 
   const { name, nRecs } = feature.properties;
-  const width = 300;
-  const height = 100;
+  const width = 250;
+  const height = 55;
   let ccc = new ColorContrastChecker();
 
   // Set up histogram
-  let margin = { top: 15, right: 15, bottom: 20, left: 15 };
+  let margin = { top: 0, right: 15, bottom: 25, left: 15 };
   let chartW = width - margin.left - margin.right;
   let chartH = height - margin.top - margin.bottom;
   $: xScale = scaleLinear().domain(colorScale.domain()).range([0, chartW]);
@@ -29,19 +29,21 @@
     .range([chartH, 0]);
 
   // --- debug
-  $: console.log("TT colorScale", colorScale.domain());
 </script>
 
-<div id="tooltip" class="tooltip-container shadow" style:top={y} style:left={x}>
+<div id="tooltip" class="tooltip-container shadow" style:{width} style:top={y} style:left={x}>
   <div class="text-content">
-    <div class="country-name">{name}</div>
+    <div class="var-container">
+      <div class="title">Country</div>
+      <div class="value">{name}</div>
+    </div>
     {#if nRecs}
       <div
         class="rec-count"
         style:background={colorScale(nRecs)}
-        style:color={ccc.isLevelCustom(d3Color(colorScale(nRecs)).formatHex(), color.white, 1.9)
+        style:color={ccc.isLevelCustom(d3Color(colorScale(nRecs)).formatHex(), color.white, 1.5)
           ? color.white
-          : color.g5}
+          : color.a1}
       >
         {nRecs}
         <span>Recommendations</span>
@@ -65,7 +67,7 @@
         /> -->
 
         <!-- BINS -->
-        {#each bins as bin}
+        <!-- {#each bins as bin}
           <rect
             x={xScale(bin.x0)}
             y={yScale(bin.length)}
@@ -73,7 +75,7 @@
             height={chartH - yScale(bin.length)}
             fill={color.g2}
           />
-        {/each}
+        {/each} -->
 
         <!-- X-AXIS -->
         <line
@@ -95,17 +97,22 @@
         <text
           class="x-label"
           x={xScale.range()[1] / 2}
-          y={yScale(0) + 10}
+          y={yScale(0) + 15}
           dominant-baseline="hanging"
           text-anchor="middle"># of recommendations</text
         >
+
+        <!-- BG CIRCLES -->
+        {#each data as country}
+          <circle cx={xScale(country.nRecs)} cy={yScale(0)} r={6} fill={color.g3} opacity={0.5} />
+        {/each}
 
         <!-- COUNTRY CIRCLE -->
         {#if nRecs}
           <circle
             cx={xScale(nRecs)}
             cy={yScale(0)}
-            r="8"
+            r="10"
             fill={colorScale(nRecs)}
             stroke={color.g5}
           />
@@ -129,6 +136,7 @@
   .text-content {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
   }
 
   .rec-count {
@@ -136,9 +144,10 @@
     height: 100%;
     border-radius: 3px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column-reverse;
+    align-items: flex-start;
     justify-content: center;
+    gap: 5px;
     font-size: 24px;
     line-height: 24px;
     font-weight: 800;
@@ -152,18 +161,29 @@
     }
   }
 
+  .var-container {
+    max-width: 200px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .title {
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .value {
+      font-size: 24px;
+      line-height: 24px;
+      font-weight: 800;
+    }
+  }
+
   .no-data {
     font-style: italic;
     font-size: 14px;
-  }
-
-  .country-name {
-    max-width: 180px;
-    font-weight: 800;
-    font-size: 26px;
-    line-height: 24px;
-    letter-spacing: -0.005em;
-    margin-bottom: 10px;
   }
 
   .tick,

@@ -1,18 +1,19 @@
 <script>
+  import { color } from "$data/variables.json";
+  import { tooltip } from "$actions/tooltip";
+
   import { getContext, createEventDispatcher } from "svelte";
   import { scaleLinear, extent, color as d3Color } from "d3";
-  import { color } from "$data/variables.json";
   import ColorContrastChecker from "color-contrast-checker";
 
+  import HeatmapTooltip from "$components/tooltips/HeatmapTooltip.svelte";
+
   export let colorScale;
+  export let splitBy;
 
   let ccc = new ColorContrastChecker();
 
   const { data, width, height, xScale, yScale, yRange } = getContext("LayerCake");
-
-  // $: colorScale = scaleLinear()
-  //   .domain(extent($data, (d) => d.nRecs))
-  //   .range([color.white, color.a1]);
 
   $: yTicks = $yScale.domain();
 </script>
@@ -20,6 +21,10 @@
 <g class="heatmap">
   {#each $data as d, i}
     <rect
+      use:tooltip={{
+        component: HeatmapTooltip,
+        props: { item: d, data, splitBy, colorScale }
+      }}
       class="cell"
       data-id={i}
       x={$xScale(d.year)}

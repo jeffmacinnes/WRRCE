@@ -49,8 +49,8 @@
       <div>Copyright Ⓒ {new Date().getFullYear()}. All Rights Reserved</div>
       <a href="https://www.jeffmacinnes.com"
         ><div class="jm-logo">
-          Site Design:
-          <img src={JMLogo} alt="test" />
+          Site Design & Development:
+          <span>Jeff MacInnes Design</span>
         </div>
       </a>
     </div>
@@ -115,6 +115,11 @@
     cursor: pointer;
     // text-transform: uppercase;
     font-size: 16px;
+
+    span {
+      display: block;
+      text-decoration: underline;
+    }
 
     * {
       margin-top: 5px;
