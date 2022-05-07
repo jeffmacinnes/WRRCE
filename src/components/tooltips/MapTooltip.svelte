@@ -33,7 +33,7 @@
   // --- debug
 </script>
 
-<div id="tooltip" class="tooltip-container shadow" style:{width} style:top={y} style:left={x}>
+<div id="tooltip" class="tooltip-container shadow" style:width style:top={y} style:left={x}>
   <div class="text-content">
     <div class="var-container">
       <div class="title">Country</div>
@@ -56,7 +56,7 @@
   </div>
 
   <div class="chart-container">
-    <svg {width} {height} viewBox={`[0 0 ${chartW} ${chartH}]`}>
+    <svg {width} {height} viewBox={[0, 0, width, height]}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         <!-- Y-AXIS -->
         <!-- <line

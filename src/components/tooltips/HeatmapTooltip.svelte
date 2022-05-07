@@ -65,7 +65,7 @@
 
   <div class="charts-container">
     <!-- BY YEAR PLOT -->
-    <svg {width} {height} viewBox={`[0 0 ${chartW} ${chartH}]`}>
+    <svg {width} {height} viewBox={[0, 0, width, height]}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         <!-- Y-AXIS -->
         {#each year_yTickVals as yTick}
