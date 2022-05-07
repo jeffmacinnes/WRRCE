@@ -8,10 +8,7 @@
   let { country, institution, year, complianceStatus, actionDisplay, precisionDisplay } = data;
 
   let expandedFields = {
-    minor: [
-      { key: "id", display: "id" },
-      { key: "complianceSum", display: "sum" }
-    ],
+    minor: [{ key: "id", display: "id" }],
     major: [
       { key: "institutionDisplay", display: "institution" },
       { key: "recommendation", display: "recommendation" }
