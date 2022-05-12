@@ -1,10 +1,16 @@
 <script>
   import { goto } from "$app/navigation";
   import { color } from "$data/variables.json";
+  import { downloadData, getCodebookURL } from "$data/download";
+  import { downloadURL } from "$utils/downloadUtils";
 
   import Logo from "$assets/WRRCE_logo_gray.svg";
-  import JMLogo from "$assets/JMLogo.png";
   import CTA from "$components/common/CTA.svelte";
+
+  const downloadCodebook = async () => {
+    let url = await getCodebookURL();
+    downloadURL(url, "WRRCE_codebook.pdf");
+  };
 </script>
 
 <footer>
@@ -31,6 +37,7 @@
           lineSize="1px"
           color={color.c1}
           iconFirst={true}
+          onClick={() => downloadData()}
         />
         <div class="spacer" />
         <CTA
@@ -41,6 +48,7 @@
           lineSize="1px"
           iconFirst={true}
           color={color.c1}
+          onClick={() => downloadCodebook()}
         />
       </div>
     </div>

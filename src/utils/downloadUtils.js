@@ -7,6 +7,18 @@ export const csvDownload = (data) => {
   return encodeURI(content);
 };
 
+export const downloadURL = (URL, filename) => {
+  // create a dummy <a> element that can be temporarily added to the DOM
+  // to trigger a file download.
+  let element = document.createElement("a");
+  element.href = URL;
+  element.setAttribute("target", "_blank");
+  element.setAttribute("download", filename);
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+};
+
 export const zipFiles = (fileArray, zipFolder, zipName) => {
   /*
     e.g. 

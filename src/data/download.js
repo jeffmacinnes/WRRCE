@@ -1,4 +1,5 @@
 // tools for downloading the WRRCE datasets
+import { client } from "$utils/SanityClient";
 import { get } from "svelte/store";
 import { csv } from "d3-fetch";
 import { zipFiles } from "$utils/downloadUtils";
@@ -90,4 +91,24 @@ export const downloadData = async (filter = false) => {
 
   let zipFolder = zipFname.replace(".zip", "");
   zipFiles(fileArray, zipFolder, zipFname);
+};
+
+export const getCodebookURL = async () => {
+  // get the file url for the codebook pdf from sanity. Assumes there's only one codebook document
+  const { projectId, dataset } = client.config();
+  const query = "*[_type == 'codebook']";
+  const results = await client.fetch(query);
+  const [_file, fid, extension] = results[0].pdf.asset._ref.split("-");
+  let url = `https://cdn.sanity.io/files/${projectId}/${dataset}/${fid}.${extension}?dl=WRRCE_Codebook.pdf`;
+
+  return url;
+};
+
+export const getArticleURL = (article) => {
+  // create a download url from the given article object as returned from sanity
+  const { projectId, dataset } = client.config();
+  const [_file, fid, extension] = article.pdf.asset._ref.split("-");
+  const filename = article.title.trim().replace(":", "-");
+  let url = `https://cdn.sanity.io/files/${projectId}/${dataset}/${fid}.${extension}?dl=${filename}.pdf`;
+  return url;
 };

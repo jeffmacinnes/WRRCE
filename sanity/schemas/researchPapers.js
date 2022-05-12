@@ -17,10 +17,23 @@ export default {
       type: "text"
     },
     {
+      title: "Short summary",
+      name: "shortSummary",
+      type: "text",
+      description: "(1-2 sentences)"
+    },
+    {
+      title: "Journal",
+      name: "journal",
+      type: "string"
+    },
+    {
       title: "Publication Date",
       name: "publicationDate",
-      type: "string",
-      description: "(e.g. Jan 2022)"
+      type: "date",
+      options: {
+        dateFormat: "MMM DD YYYY"
+      }
     },
     {
       title: "Include",
@@ -33,5 +46,8 @@ export default {
       name: "pdf",
       type: "file"
     }
-  ]
+  ],
+  initialValue: {
+    include: true
+  }
 };

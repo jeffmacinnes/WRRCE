@@ -147,7 +147,7 @@
     border-radius: 3px;
     display: flex;
     flex-direction: column-reverse;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     gap: 5px;
     font-size: 24px;
@@ -180,6 +180,7 @@
       font-size: 24px;
       line-height: 24px;
       font-weight: 800;
+      color: var(--color-g6);
     }
   }
 

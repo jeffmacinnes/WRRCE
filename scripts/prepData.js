@@ -64,7 +64,8 @@ const prepCEDAW = async () => {
   fastcsv.write(data, { headers: true }).pipe(ws);
 
   // return dataset filtered to include only the shared vars
-  return data.map(selectProps(commonVars));
+  let props = [...commonVars, "documentname"];
+  return data.map(selectProps(props));
 };
 
 const prepECtHR = async () => {
@@ -74,13 +75,15 @@ const prepECtHR = async () => {
     ...d,
     id: `ECtHR${String(i).padStart(4, "0")}`,
     institution: "ECtHR",
-    year: d["year(rec)"]
+    year: d["year(rec)"],
+    recSource: `${d["sources"]}, ${d["COMmeetingnumber_rec"]}`
   })); // <- rename year var as well
 
   const ws = fs.createWriteStream("src/data/processed/ECtHR.csv");
   fastcsv.write(data, { headers: true }).pipe(ws);
 
-  return data.map(selectProps(commonVars));
+  let props = [...commonVars, "case", "finaljudgmentdate", "recSource"];
+  return data.map(selectProps(props));
 };
 
 const prepUPR = async () => {
@@ -91,7 +94,8 @@ const prepUPR = async () => {
   const ws = fs.createWriteStream("src/data/processed/UPR.csv");
   fastcsv.write(data, { headers: true }).pipe(ws);
 
-  return data.map(selectProps(commonVars));
+  let props = [...commonVars, "session", "recstate"];
+  return data.map(selectProps(props));
 };
 
 (async () => {
@@ -120,7 +124,13 @@ const prepUPR = async () => {
     vaw: d.vaw === "1",
     econ: d.econ === "1",
     action: +d.action,
-    precision: +d.precision
+    precision: +d.precision,
+    documentname: d.documentname,
+    session: d.session,
+    recstate: d.recstate,
+    case: d.case,
+    finaljudgmentdate: d.finaljudgmentdate,
+    recSource: d.recSource
   }));
 
   // clean up country names
@@ -142,7 +152,7 @@ const prepUPR = async () => {
   const ws = fs.createWriteStream("src/data/processed/combinedData.csv");
   fastcsv.write(combined, { headers: true }).pipe(ws);
 
-  // tmp
+  // --- tmp
   let tmp = combined.map((d) => ({
     year: +d.year,
     nomention: +d.nomention,

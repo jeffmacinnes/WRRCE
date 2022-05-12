@@ -13,6 +13,7 @@ import landingPage from "./landingPage";
 import finding from "./finding";
 import linkBox from "./linkBox";
 import researchPapers from "./researchPapers";
+import codebook from "./codebook";
 import tooltips from "./tooltips";
 
 // Then we give our schema to the builder and provide the result to Sanity
@@ -22,6 +23,7 @@ export default createSchema({
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
+    codebook,
     researchPapers,
     tooltips,
     aboutPage,

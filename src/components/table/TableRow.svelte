@@ -8,11 +8,39 @@
   let { country, institution, year, complianceStatus, actionDisplay, precisionDisplay } = data;
 
   let expandedFields = {
-    minor: [{ key: "id", display: "id" }],
-    major: [
-      { key: "institutionDisplay", display: "institution" },
-      { key: "recommendation", display: "recommendation" }
-    ]
+    CEDAW: {
+      minor: [
+        { key: "id", display: "id" },
+        { key: "documentname", display: "recommendation source" }
+      ],
+      major: [
+        { key: "institutionDisplay", display: "institution" },
+        { key: "recommendation", display: "recommendation" }
+      ]
+    },
+    UPR: {
+      minor: [
+        { key: "id", display: "id" },
+        { key: "session", display: "session" }
+      ],
+      major: [
+        { key: "institutionDisplay", display: "institution" },
+        { key: "recommendation", display: "recommendation" },
+        { key: "recstate", display: "recommending state" }
+      ]
+    },
+    ECtHR: {
+      minor: [
+        { key: "id", display: "id" },
+        { key: "case", display: "judgment name" },
+        { key: "finaljudgmentdate", display: "judgment date" }
+      ],
+      major: [
+        { key: "institutionDisplay", display: "institution" },
+        { key: "recommendation", display: "recommendation" },
+        { key: "recSource", display: "recommendation source" }
+      ]
+    }
   };
 
   // --- Debugging ---
@@ -49,7 +77,7 @@
     <td />
     <td colspan="1">
       <div class="expanded-content-container minor" transition:slide={{ duration: 300 }}>
-        {#each expandedFields["minor"] as item}
+        {#each expandedFields[institution]["minor"] as item}
           <div>
             <div class="field-type">{item.display}</div>
             <div class="field-content">{data[item.key]}</div>
@@ -59,7 +87,7 @@
     </td>
     <td colspan="6">
       <div class="expanded-content-container major" transition:slide={{ duration: 300 }}>
-        {#each expandedFields["major"] as item}
+        {#each expandedFields[institution]["major"] as item}
           <div>
             <div class="field-type">{item.display}</div>
             <div class="field-content">{data[item.key]}</div>

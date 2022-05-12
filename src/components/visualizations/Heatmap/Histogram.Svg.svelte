@@ -10,16 +10,6 @@
 <!-- Y-Ticks -->
 <g class="axes">
   {#each yTickVals as yTick}
-    <!-- <line
-      class="x-axis"
-      x1={$xRange[0]}
-      x2={$xRange[1]}
-      y1={$yScale(yTick)}
-      y2={$yScale(yTick)}
-      stroke-width={1}
-      stroke-dasharray={3}
-      opacity={yTick === 0 ? 0 : 1}
-    /> -->
     <line
       class="x-axis"
       x1={$xRange[0]}
