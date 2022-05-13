@@ -4,7 +4,7 @@
  -->
 <script>
   import { onMount } from "svelte";
-  import { scaleLinear, quantize, interpolate } from "d3";
+  import { scaleLinear, scaleSequential, quantize, interpolate, interpolateRound } from "d3";
   import { color } from "$data/variables.json";
 
   export let colorScale;
@@ -44,6 +44,19 @@
       n = Math.min(colorScale.domain().length, colorScale.range().length);
       x = colorScale.copy().rangeRound(quantize(interpolate(margin.left, width - margin.right), n));
       xlink = genRamp(colorScale.copy().domain(quantize(interpolate(0, 1), n))).toDataURL();
+
+      // sequential
+    } else if (colorScale.interpolator) {
+      type = "sequential";
+      x = Object.assign(
+        colorScale.copy().interpolator(interpolateRound(margin.left, width - margin.right)),
+        {
+          range() {
+            return [margin.left, width - margin.right];
+          }
+        }
+      );
+      xlink = genRamp(colorScale.interpolator()).toDataURL();
     }
   });
 </script>
@@ -52,7 +65,7 @@
   <!-- <rect x={0} y={0} {width} {height} fill="red" opacity={0.2} /> -->
 
   <!-- COLOR SCALE -->
-  {#if type === "continuous"}
+  {#if ["continuous", "sequential"].includes(type)}
     <image
       x={margin.left}
       y={margin.top}

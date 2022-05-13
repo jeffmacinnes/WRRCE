@@ -13,12 +13,11 @@
 </script>
 
 <script>
-  import CTA from "$components/common/CTA.svelte";
   import Finding from "$components/common/Finding.svelte";
   export let copy;
 
   // prep copy
-  let { heading, body, findings } = copy;
+  let { body, findings } = copy;
   body = body.split("\n").filter((d) => d.length > 0);
 </script>
 
@@ -35,7 +34,7 @@
   </div>
 
   {#each findings as finding, i}
-    <Finding copy={finding} figSide={i % 2 === 0 ? "left" : "right"} />
+    <Finding {finding} figSide={i % 2 === 0 ? "left" : "right"} />
   {/each}
 </section>
 

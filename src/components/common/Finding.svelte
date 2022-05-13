@@ -1,9 +1,12 @@
 <script>
-  export let copy;
+  import { client } from "$utils/SanityClient";
+  import imageUrlBuilder from "@sanity/image-url";
+
+  export let finding;
   export let figSide = "right";
 
   // prep copy
-  let { heading, body, figureTitle, figureCaption } = copy;
+  let { heading, body, figureThumnail, figure } = finding;
   body = body.split("\n").filter((d) => d.length > 0);
 
   $: textSide = figSide === "right" ? "left" : "right";
