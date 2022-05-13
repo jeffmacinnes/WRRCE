@@ -1,38 +1,54 @@
 <script>
   import { client } from "$utils/SanityClient";
   import imageUrlBuilder from "@sanity/image-url";
+  import { Lightbox } from "svelte-lightbox";
 
   export let finding;
   export let figSide = "right";
 
+  const imgBuilder = imageUrlBuilder(client);
+  const urlFor = (source) => {
+    console.log(source);
+
+    let i = imgBuilder.image(source);
+    console.log(i);
+    return i;
+  };
+
   // prep copy
-  let { heading, body, figureThumnail, figure } = finding;
+  let { heading, body, figureThumbnail, figure } = finding;
+
   body = body.split("\n").filter((d) => d.length > 0);
 
   $: textSide = figSide === "right" ? "left" : "right";
 </script>
 
-<div class="finding-container col-12">
-  <div class={`text-container ${textSide}`}>
-    <h2>{heading}</h2>
-    <div>
-      {#each body as text}
-        <p class="body-rg">{@html text}</p>
-      {/each}
+<div class={`figure-container ${figSide}`}>
+  <Lightbox thumbnail>
+    <!-- THUMBNAIL IMAGE -->
+    <div class="thumbnail" slot="thumbnail">
+      <img class="shadow" src={urlFor(figureThumbnail)} alt="" />
     </div>
-  </div>
 
-  <div class={`figure-container ${figSide}`}>
-    <div class="figure">Figure placeholder</div>
-    <div class="caption-container">
-      <h5>{figureTitle}</h5>
-      <div class="caption-divider" />
-      <div class="caption-text body-sm">{figureCaption}</div>
+    <!-- POPUP IMAGE -->
+    <div class="figure" slot="image">
+      <img src={urlFor(figure)} alt="" />
+      <div class="caption-container">
+        <h5>{figureTitle}</h5>
+        <div class="caption-divider" />
+        <div class="caption-text">{figureCaption}</div>
+      </div>
     </div>
-  </div>
+  </Lightbox>
 
-  <div class="finding-divider" />
+  <div class="caption-container">
+    <h5>{figureTitle}</h5>
+    <div class="caption-divider" />
+    <div class="caption-text body-sm">{figureCaption}</div>
+  </div>
 </div>
+
+<div class="finding-divider" />
 
 <style lang="scss">
   .finding-container {

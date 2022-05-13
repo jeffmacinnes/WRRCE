@@ -38,6 +38,7 @@
     "sass": "^1.47.0",
     "style-dictionary": "^3.1.1",
     "svelte": "^3.46.4",
+    "svelte-lightbox": "^0.6.2",
     "svelte-preprocess": "^4.10.2",
     "svelte-range-slider-pips": "^2.0.3",
     "title-case": "^3.0.3",

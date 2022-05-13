@@ -19,6 +19,8 @@
   // prep copy
   let { body, findings } = copy;
   body = body.split("\n").filter((d) => d.length > 0);
+
+  $: console.log(findings);
 </script>
 
 <section class="findings-page-container">
