@@ -1,9 +1,13 @@
 <script>
-  import { slide } from "svelte/transition";
+  import { slide, fade } from "svelte/transition";
   import { extent } from "d3-array";
+  import { color } from "$data/variables.json";
+  import { tooltip } from "$actions/tooltip";
 
   import Checkbox from "$components/common/Checkbox.svelte";
   import RangeSelector from "$components/common/RangeSelector.svelte";
+  import Icon from "$components/helpers/Icon.svelte";
+  import VariableTooltip from "$components/tooltips/variables/VariableTooltip.svelte";
 
   export let name;
   export let display;
@@ -11,9 +15,12 @@
   export let opts;
   export let onToggle;
   export let onOptsUpdate;
+  export let tooltipContent;
 
   // -- calculate the type of filter it is
   $: type = name === "year" ? "slider" : "checkbox";
+
+  let isHovered = false;
 
   // -- calculate if any options are selected
   $: anySelected = opts.filter((opt) => opt.isSelected).length > 0;
@@ -48,6 +55,9 @@
       onOptsUpdate(name, opts, states);
     }
   };
+
+  // --- DEBUG
+  // $: console.log("tooltip", tooltipContent);
 </script>
 
 <!-- FILTER HEADER -->
@@ -55,9 +65,33 @@
   class="header"
   class:active={anySelected}
   on:click={() => onToggle(name)}
+  on:mouseover={() => (isHovered = true)}
+  on:mouseout={() => (isHovered = false)}
+  on:focus={() => (isHovered = true)}
+  on:blur={() => (isHovered = false)}
   aria-expanded={isOpen}
 >
-  {display}
+  <div class="label">
+    {display}
+    {#if isHovered}
+      <div
+        transition:fade={{ duration: 100 }}
+        class="help-icon"
+        use:tooltip={{
+          component: VariableTooltip,
+          props: { tooltip: tooltipContent, placement: "top-end" }
+        }}
+      >
+        <Icon
+          name="help-circle"
+          width={15}
+          height={15}
+          stroke={anySelected ? color.c4 : color.g3}
+        />
+      </div>
+    {/if}
+  </div>
+
   <svg
     style="tran"
     width="20"
@@ -117,7 +151,7 @@
     border-radius: 0;
 
     font-weight: 500;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 24px;
     letter-spacing: 0.015;
     text-transform: uppercase;
@@ -138,6 +172,18 @@
     }
 
     cursor: pointer;
+  }
+
+  .label {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .help-icon {
+    display: inline-block;
+    transform: translateY(1px);
   }
 
   svg {

@@ -1,7 +1,6 @@
 <script>
   import { fly } from "svelte/transition";
-  import { onMount } from "svelte";
-  import { showFilters, searchKeyword, filterOpts } from "$stores/dataStores.js";
+  import { showFilters, searchKeyword, filterOpts, variableTooltips } from "$stores/dataStores.js";
   import Icon from "$components/helpers/Icon.svelte";
   import Filter from "$components/filters/Filter.svelte";
   import CTA from "$components/common/CTA.svelte";
@@ -88,6 +87,7 @@
     {#each $filterOpts as filter}
       <Filter
         {...filter}
+        tooltipContent={$variableTooltips.find((d) => d.variable === filter.name)}
         opts={filter.opts}
         onToggle={toggleFilter}
         onOptsUpdate={updateFilterOpts}

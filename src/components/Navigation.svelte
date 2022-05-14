@@ -5,7 +5,7 @@
   import Logo from "$assets/WRRCE_logo_color.svg";
 
   const links = [
-    { title: "Explore", path: "/" },
+    { title: "Explore", path: "/#explore-anchor" },
     { title: "About", path: "/about" },
     { title: "Findings", path: "/findings" }
   ];
@@ -19,8 +19,10 @@
 
     <div class="links-container">
       {#each links as link}
-        <a class="link" class:active={$page.url.pathname === link.path} href={link.path}
-          >{link.title}</a
+        <a
+          class="link"
+          class:active={`${$page.url.pathname}${$page.url.hash}` === link.path}
+          href={link.path}>{link.title}</a
         >
       {/each}
     </div>

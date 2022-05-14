@@ -78,8 +78,6 @@
   let buttonSize = "25px";
 
   // --- DEBUG ----
-  $: console.log("here", geojson);
-  $: console.log(propData);
 </script>
 
 <div class="map-container">

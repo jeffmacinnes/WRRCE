@@ -1,18 +1,26 @@
 <script>
   import { onMount } from "svelte";
-  import { filteredData, rawDataCount, activeFilters, sortBy } from "$stores/dataStores.js";
+  import {
+    filteredData,
+    rawDataCount,
+    activeFilters,
+    sortBy,
+    variableTooltips
+  } from "$stores/dataStores.js";
+  import { tooltip } from "$actions/tooltip";
 
   import InfiniteScroll from "$components/helpers/InfiniteScroll.svelte";
   import TableRow from "./TableRow.svelte";
   import SortBy from "./SortBy.svelte";
+  import VariableTooltip from "$components/tooltips/variables/VariableTooltip.svelte";
 
   let tableVars = [
-    { name: "country" },
-    { name: "institution" },
-    { name: "year" },
-    { name: "compliance status" },
-    { name: "action" },
-    { name: "precision" }
+    { name: "country", display: "country" },
+    { name: "institution", display: "institution" },
+    { name: "year", display: "year" },
+    { name: "complianceStatus", display: "compliance status" },
+    { name: "action", display: "action" },
+    { name: "precision", display: "precision" }
   ];
 
   $: countText =
@@ -82,11 +90,20 @@
           <th class="expander" />
           {#each tableVars as th}
             <th
-              ><div class="header-item">
-                {th.name}<SortBy
-                  isActive={$sortBy.name === th.name}
+              ><div
+                class="header-item"
+                use:tooltip={{
+                  component: VariableTooltip,
+                  props: {
+                    tooltip: $variableTooltips.find((d) => d.variable === th.name),
+                    placement: "top"
+                  }
+                }}
+              >
+                {th.display}<SortBy
+                  isActive={$sortBy.name === th.display}
                   sortMode={$sortBy.mode}
-                  on:sortBy={() => handleSortBy(th.name)}
+                  on:sortBy={() => handleSortBy(th.display)}
                 />
               </div></th
             >
@@ -195,6 +212,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      cursor: pointer;
     }
 
     .expander {

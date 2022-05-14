@@ -8,6 +8,7 @@
   <div class="text-container">
     <h2>{heading}</h2>
     <p class="body-lg">{@html body}</p>
+    <div id="explore-anchor" />
   </div>
 </section>
 
@@ -31,5 +32,11 @@
     p {
       width: 80%;
     }
+  }
+
+  #explore-anchor {
+    width: 10px;
+    height: 10px;
+    opacity: 0;
   }
 </style>

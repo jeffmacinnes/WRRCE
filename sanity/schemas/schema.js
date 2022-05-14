@@ -14,7 +14,7 @@ import finding from "./finding";
 import linkBox from "./linkBox";
 import researchPapers from "./researchPapers";
 import codebook from "./codebook";
-import tooltips from "./tooltips";
+import tooltip from "./tooltip";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -25,7 +25,7 @@ export default createSchema({
   types: schemaTypes.concat([
     codebook,
     researchPapers,
-    tooltips,
+    tooltip,
     aboutPage,
     explorePage,
     findingsPage,

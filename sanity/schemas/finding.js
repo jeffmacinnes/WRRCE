@@ -17,10 +17,10 @@ export default {
       type: "text"
     },
     {
-      title: "Figure thumnail",
-      name: "figureThumnail",
+      title: "Figure thumbnail",
+      name: "figureThumbnail",
       type: "image",
-      description: "The thumnail image that will appear alongside the finding text",
+      description: "The thumbnail image that will appear alongside the finding text",
       fields: [
         {
           title: "Figure Title",

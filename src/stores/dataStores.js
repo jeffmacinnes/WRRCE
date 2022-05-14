@@ -8,6 +8,7 @@ import { min, max, ascending, descending } from "d3-array";
 export const showFilters = writable(false);
 export const searchKeyword = writable("");
 export const filterOpts = writable(filterOptions);
+export const variableTooltips = writable(null);
 export const fullData = readable([], (set) => set(parseData(siteData)));
 export const rawDataCount = writable(siteData.length);
 export const sortBy = writable({ name: null, mode: null });

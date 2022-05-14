@@ -72,7 +72,7 @@ export function tooltip(element, params = {}) {
     tooltip.setAttribute("data-show", "");
 
     popperRef = createPopper(virtualElement, tooltip, {
-      placement: "top",
+      placement: tooltipProps.placement || "top",
       strategy: "fixed",
       modifiers: [
         {
