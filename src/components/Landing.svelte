@@ -57,7 +57,7 @@
   }
 
   .animation-container {
-    grid-column: 10 / span 2;
+    grid-column: 9 / span 3;
     grid-row: 1;
   }
 

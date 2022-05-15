@@ -1,8 +1,9 @@
 <script>
+  import Animation from "$assets/animationPlaceholder.svg";
 </script>
 
 <div class="logo-animation-container">
-  <h4>Animation</h4>
+  <Animation />
 </div>
 
 <style>
@@ -12,6 +13,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-a1);
+    /* background-color: var(--color-a1); */
   }
 </style>
