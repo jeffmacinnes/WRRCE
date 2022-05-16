@@ -5,6 +5,7 @@ import { filterOptions } from "$data/filterOptions";
 import { color } from "$data/variables.json";
 import { min, max, ascending, descending } from "d3-array";
 
+export const headerHeight = writable(110);
 export const showFilters = writable(false);
 export const searchKeyword = writable("");
 export const filterOpts = writable(filterOptions);

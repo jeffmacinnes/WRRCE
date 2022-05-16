@@ -1,21 +1,47 @@
 <script>
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
+  import { onMount, onDestroy } from "svelte";
+  import { headerHeight } from "$stores/dataStores";
+  import { fade } from "svelte/transition";
 
   import Logo from "$assets/WRRCE_logo_color.svg";
+  import ShortLogo from "$assets/WRRCE_shortLogo.svg";
 
   const links = [
     { title: "Explore", path: "/#explore-anchor" },
     { title: "About", path: "/about" },
     { title: "Findings", path: "/findings" }
   ];
+
+  let showFullLogo = true;
+  onMount(() => {
+    // window.onscroll = () => {
+    //   let windowScrolled = window.scrollY > 50;
+    //   if (showFullLogo && windowScrolled) {
+    //     // toggle short logo ON
+    //     showFullLogo = false;
+    //     headerHeight.set(60);
+    //   } else if (!showFullLogo && !windowScrolled) {
+    //     // toggle full logo ON
+    //     showFullLogo = true;
+    //     headerHeight.set(100);
+    //   }
+    // };
+  });
 </script>
 
 <nav>
   <div class="nav-container">
-    <div class="logo-container" on:click={() => goto("/")}>
-      <Logo />
-    </div>
+    {#if showFullLogo}
+      <div transition={fade} class="logo-container" on:click={() => goto("/")}>
+        <Logo />
+      </div>
+    {:else}
+      <div transition={fade} class="logo-container" on:click={() => goto("/")}>
+        <ShortLogo />
+      </div>
+    {/if}
 
     <div class="links-container">
       {#each links as link}
@@ -41,18 +67,20 @@
   .nav-container {
     position: relative;
     max-width: 1600px;
-    height: 100px;
+    height: 100%;
     border-bottom: solid 1px var(--color-c4);
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     margin: 0 auto;
     padding: 0px 40px 10px;
+    transition: height 0.1s;
   }
 
   .logo-container {
     width: 250px;
-    height: 75px;
+    // height: 75px;
+    margin-top: 10px;
     cursor: pointer;
   }
 

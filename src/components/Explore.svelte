@@ -1,5 +1,6 @@
 <script>
   import { setContext } from "svelte";
+  import { headerHeight } from "$stores/dataStores";
 
   import CurrentFilters from "$components/filters/CurrentFilters.svelte";
   import FiltersPanel from "$components/filters/FiltersPanel.svelte";
@@ -12,7 +13,7 @@
 </script>
 
 <section class="explore-container">
-  <div class="fg">
+  <div class="fg" style:top={`${$headerHeight}px`}>
     <CurrentFilters />
   </div>
 
@@ -40,7 +41,7 @@
   .fg {
     position: sticky;
     width: 100%;
-    top: 100px;
+    // top: 100px;
     z-index: 10;
   }
 
