@@ -77,6 +77,7 @@
     margin-top: 100px;
     min-height: 250px;
     background-color: var(--color-c4);
+    background: linear-gradient(to left top, var(--color-c2), var(--color-c4));
     color: var(--color-white);
     border-radius: 0px;
     cursor: pointer;
