@@ -9,12 +9,10 @@
 
   export let copy;
   let { heading, body, links } = copy;
-
-  let textContainerH;
 </script>
 
 <section class="landing-container col-12">
-  <div bind:clientHeight={textContainerH} class="text-container">
+  <div class="text-container">
     <h2>{heading}</h2>
     <p class="body-lg">{@html body}</p>
     <CTA
@@ -27,7 +25,7 @@
   </div>
 
   <div class="animation-container">
-    <LogoAnimation height={textContainerH} />
+    <LogoAnimation />
   </div>
 
   {#each links as link, i}
