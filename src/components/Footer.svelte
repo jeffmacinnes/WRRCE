@@ -5,6 +5,7 @@
   import { downloadURL } from "$utils/downloadUtils";
 
   import Logo from "$assets/WRRCE_logo_gray.svg";
+  import BgDots from "$assets/bgDots.svg";
   import CTA from "$components/common/CTA.svelte";
 
   const downloadCodebook = async () => {
@@ -15,6 +16,9 @@
 
 <footer>
   <div class="container">
+    <div class="bg-image">
+      <BgDots />
+    </div>
     <div class="col col-1">
       <div class="logo-container" on:click={() => goto("/")}>
         <Logo />
@@ -79,6 +83,7 @@
   }
 
   .container {
+    position: relative;
     width: 100%;
     max-width: 1200px;
     padding: 50px;
@@ -87,6 +92,14 @@
     justify-content: space-between;
 
     // border: solid 1px white;
+  }
+
+  .bg-image {
+    position: absolute;
+    right: 50px;
+    bottom: 0;
+    opacity: 0.07;
+    transform: rotate(90deg) scale(1.5);
   }
 
   .col {
