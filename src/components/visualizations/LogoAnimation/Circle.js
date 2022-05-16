@@ -19,7 +19,7 @@ export class Circle {
   }
 
   update() {
-    this.step += 0.002;
+    this.step += 0.003;
     let noise = this.p5.noise(this.noiseStart * noiseScale + this.step);
     this.opacity = this.p5.map(noise, 0.25, 0.75, 0, 255);
 
