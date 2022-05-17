@@ -33,8 +33,6 @@
   export let copy;
   export let articles;
 
-  console.log("here", articles);
-
   // prep copy
   let { heading, body, subheading, objectives, methods } = copy;
   body = body.split("\n").filter((d) => d.length > 0);

@@ -31,6 +31,7 @@ const generateREADME = (instData) => {
   \tUPR - Universal Periodic Review
   \tECtHR - European Court of Human Rights
 
+  Definitions for all variables in the datasets can be found in the codebook, available to download in the Methods section at https://www.wrrce.org/about/
   ---
 
   `);

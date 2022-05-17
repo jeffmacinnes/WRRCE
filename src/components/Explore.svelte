@@ -1,15 +1,10 @@
 <script>
-  import { setContext } from "svelte";
   import { headerHeight } from "$stores/dataStores";
 
   import CurrentFilters from "$components/filters/CurrentFilters.svelte";
   import FiltersPanel from "$components/filters/FiltersPanel.svelte";
   import Visualizations from "$components/visualizations/Visualizations.svelte";
   import Table from "$components/table/Table.svelte";
-
-  export let tooltips;
-
-  setContext("tooltips", tooltips);
 </script>
 
 <section class="explore-container">

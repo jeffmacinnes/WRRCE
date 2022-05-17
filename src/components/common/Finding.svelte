@@ -30,7 +30,7 @@
   </div>
 
   <div class={`figure-container ${figSide}`}>
-    <Lightbox thumbnail>
+    <Lightbox thumbnail imagePreset="scroll" modalClasses={"popup-modal"}>
       <div class="thumbnail" slot="thumbnail">
         <img class="shadow" src={urlFor(figureThumbnail).url()} alt={figureThumbnail.alt} />
       </div>
@@ -74,19 +74,29 @@
     padding: 0 20px;
   }
 
+  :global(div:has(.popup-modal)) {
+    background-color: red;
+  }
+
   .figure {
-    width: 100%;
-    background-color: var(--color-a1);
+    background-color: rgba(255, 255, 255, 0);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0;
+
+    img {
+      height: 80%;
+      width: 80%;
+    }
 
     .caption-container {
       width: 80%;
       padding: 10px;
       background-color: var(--color-a1);
       color: var(--color-white);
+      margin: 0;
     }
 
     .caption-divider {

@@ -30,9 +30,12 @@
 
   // put the tooltips for the data variables in a store since they'll be accessed multiple places
   variableTooltips.set(tooltips);
+
+  let description =
+    "Tracking Compliance with Women's Rights Recommendations throughout Europe. New data and analytical tools to help scholars, practitioners and other stakeholders better understand how international human rights recommendations become reality";
 </script>
 
-<Meta />
+<Meta url="https://www.wrrce.org/" {description} />
 <Landing copy={landingCopy} />
 <ExploreIntro copy={exploreCopy} />
 <Explore />

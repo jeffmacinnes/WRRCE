@@ -104,7 +104,7 @@
     top: 0;
     left: 0;
     padding: 15px;
-    padding-top: 50px;
+    padding-top: 70px;
     border-right: 1px solid black;
     background-color: var(--color-white);
     overscroll-behavior: contain;
@@ -113,7 +113,7 @@
   .close-button {
     position: absolute;
     right: 15px;
-    top: 47px;
+    top: 67px;
     cursor: pointer;
 
     &:hover {

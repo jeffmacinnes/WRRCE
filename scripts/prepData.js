@@ -76,7 +76,7 @@ const prepECtHR = async () => {
     id: `ECtHR${String(i).padStart(4, "0")}`,
     institution: "ECtHR",
     year: d["year(rec)"],
-    recSource: `${d["sources"]}, ${d["COMmeetingnumber_rec"]}`
+    recSource: `${d["sources"]}, Committee of Ministers meeting #${d["COMmeetingnumber_rec"]}`
   })); // <- rename year var as well
 
   const ws = fs.createWriteStream("src/data/processed/ECtHR.csv");

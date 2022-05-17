@@ -32,6 +32,7 @@
     left: 50%;
     border-radius: 50%;
     background-color: var(--color-a1);
+    /* background: linear-gradient(to left bottom, var(--color-a1), var(--color-white)); */
     transform: translate(-100%);
     opacity: 15%;
     z-index: -1;

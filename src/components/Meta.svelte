@@ -1,19 +1,20 @@
 <script>
   export let title = "WRRCE";
   export let description = "Description";
-  export let url = "https://google.com";
+  export let url = "https://wrrce.org";
   export let keywords = "";
   export let preloadFont = [];
 </script>
 
 <svelte:head>
   <title>{title}</title>
+  <link rel="icon" href="{url}/assets/favicon.png" />
   <meta name="description" content={description} />
-  <meta name="author" content="The Pudding" />
+  <meta name="author" content="" />
   <meta name="news_keywords" content={keywords} />
 
   <meta property="og:title" content={title} />
-  <meta property="og:site_name" content="The Pudding" />
+  <meta property="og:site_name" content="Women's Rights Recommendation & Compliance Explorer" />
   <meta property="og:url" content={url} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="article" />
@@ -25,8 +26,7 @@
   <meta property="og:image:height" content="600" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="https://pudding.cool" />
-  <meta name="twitter:creator" content="@jeffmacinnes" />
+  <meta name="twitter:site" content="https://www.wrrce.org" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image:src" content="{url}/assets/social-twitter.jpg" />
