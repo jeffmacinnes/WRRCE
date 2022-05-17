@@ -8,7 +8,7 @@
 
 <svelte:head>
   <title>{title}</title>
-  <link rel="icon" href="{url}/assets/favicon.png" />
+  <link rel="icon" href="{url}/assets/favicon.svg" />
   <meta name="description" content={description} />
   <meta name="author" content="" />
   <meta name="news_keywords" content={keywords} />
@@ -20,7 +20,7 @@
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="en_US" />
 
-  <meta property="og:image" content="{url}/assets/social.jpg" />
+  <meta property="og:image" content="{url}/assets/social.png" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="600" />
@@ -29,7 +29,7 @@
   <meta name="twitter:site" content="https://www.wrrce.org" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image:src" content="{url}/assets/social.jpg" />
+  <meta name="twitter:image:src" content="{url}/assets/social.png" />
 
   <meta name="robots" content="max-image-preview:large" />
 
