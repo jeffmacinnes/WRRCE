@@ -35,7 +35,7 @@
     "Tracking Compliance with Women's Rights Recommendations throughout Europe. New data and analytical tools to help scholars, practitioners and other stakeholders better understand how international human rights recommendations become reality";
 </script>
 
-<Meta url="https://www.wrrce.org/" {description} />
+<Meta url="https://www.wrrce.org" {description} />
 <Landing copy={landingCopy} />
 <ExploreIntro copy={exploreCopy} />
 <Explore />
