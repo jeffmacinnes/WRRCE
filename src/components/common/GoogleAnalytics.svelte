@@ -3,7 +3,7 @@
   $: {
     if (typeof gtag !== "undefined") {
       gtag("config", "G-KXVZJSMS7P", {
-        page_path: $page.path
+        page_path: $page.url.pathname
       });
     }
   }
