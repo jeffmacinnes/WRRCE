@@ -33,6 +33,11 @@ export default {
       of: [{ type: "string" }]
     },
     {
+      title: "Research Team",
+      name: "researchTeam",
+      type: "text"
+    },
+    {
       title: "Methods",
       name: "methods",
       type: "text"

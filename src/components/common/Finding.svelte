@@ -2,6 +2,7 @@
   import { client } from "$utils/SanityClient";
   import imageUrlBuilder from "@sanity/image-url";
   import { Lightbox } from "svelte-lightbox";
+  import mq from "$stores/mq.js";
 
   export let finding;
   export let figSide = "right";
@@ -121,5 +122,45 @@
     grid-row: 2;
     height: 10px;
     border-bottom: solid 1px var(--color-a1);
+  }
+
+  @media screen and (max-width: 600px) {
+    .finding-container {
+      margin: 50px auto;
+    }
+
+    .left {
+      grid-column: 2 / span 10;
+      grid-row: 1;
+    }
+
+    .right {
+      grid-column: 2 / span 10;
+      grid-row: 2;
+    }
+
+    .text-container {
+      padding: 0 00px;
+    }
+
+    h5 {
+      font-size: 16px;
+      line-height: 18px;
+    }
+
+    .figure {
+      h5 {
+        font-size: 16px;
+        line-height: 18px;
+      }
+
+      .caption-text {
+        font-size: 10px;
+      }
+    }
+
+    .finding-divider {
+      display: none;
+    }
   }
 </style>

@@ -62,7 +62,7 @@
       <a href="https://www.jeffmacinnes.com"
         ><div class="jm-logo">
           Site Design & Development:
-          <span>Jeff MacInnes Design</span>
+          <span>Jeff MacInnes</span>
         </div>
       </a>
     </div>
@@ -80,6 +80,7 @@
     align-items: center;
     z-index: 100;
     background-color: var(--color-c4);
+    overflow: hidden;
   }
 
   .container {
@@ -154,5 +155,16 @@
 
   .contact {
     font-size: 18px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .container {
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .col {
+      gap: 20px;
+    }
   }
 </style>

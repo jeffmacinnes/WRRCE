@@ -68,4 +68,10 @@
     justify-content: center;
     align-items: center;
   }
+
+  @media screen and (max-width: 600px) {
+    .intro-container {
+      grid-column: 2 / span 10;
+    }
+  }
 </style>

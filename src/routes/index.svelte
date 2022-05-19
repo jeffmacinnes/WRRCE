@@ -22,6 +22,7 @@
   import ExploreIntro from "$components/ExploreIntro.svelte";
   import Explore from "$components/Explore.svelte";
 
+  import mq from "$stores/mq.js";
   import { variableTooltips } from "$stores/dataStores.js";
 
   export let landingCopy;
@@ -38,4 +39,7 @@
 <Meta url="https://www.wrrce.org" {description} />
 <Landing copy={landingCopy} />
 <ExploreIntro copy={exploreCopy} />
-<Explore />
+
+{#if !$mq.sm && !$mq.md}
+  <Explore />
+{/if}

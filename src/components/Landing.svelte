@@ -112,4 +112,31 @@
       }
     }
   }
+
+  @media screen and (max-width: 600px) {
+    .text-container {
+      grid-column: 2 / span 10;
+      grid-row: 1;
+      z-index: 1;
+    }
+
+    .animation-container {
+      display: none;
+    }
+
+    .link {
+      padding: 10;
+      margin-top: 20px;
+
+      &.link1 {
+        grid-row: 2;
+        grid-column: 2 / span 10;
+      }
+
+      &.link2 {
+        grid-row: 3;
+        grid-column: 2 / span 10;
+      }
+    }
+  }
 </style>

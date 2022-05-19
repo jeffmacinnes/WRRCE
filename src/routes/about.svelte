@@ -29,14 +29,16 @@
   import { color } from "$data/variables.json";
   import { getCodebookURL, getArticleURL } from "$data/download";
   import { downloadURL } from "$utils/downloadUtils";
+  import mq from "$stores/mq.js";
 
   export let copy;
   export let articles;
 
   // prep copy
-  let { heading, body, subheading, objectives, methods } = copy;
+  let { heading, body, subheading, objectives, researchTeam, methods } = copy;
   body = body.split("\n").filter((d) => d.length > 0);
   methods = methods.split("\n").filter((d) => d.length > 0);
+  researchTeam = researchTeam.split("\n").filter((d) => d.length > 0);
 
   const downloadCodebook = async () => {
     let url = await getCodebookURL();
@@ -46,22 +48,24 @@
 
 <section class="about-container col-12">
   <!-- RELATED PAPERS -->
-  <aside class="related-papers-container">
-    <div class="title"><h4>Research articles</h4></div>
-    {#each articles as article}
-      <a class="article-container" href={getArticleURL(article)} target="_blank">
-        <Icon name="file-text" width={24} height={24} color={color.c3} />
-        <div class="text-content">
-          <div class="heading">
-            {`${article.publicationDate.split("-")[0]} - ${article.journal}`}
+  {#if !$mq.sm}
+    <aside class="related-papers-container">
+      <div class="title"><h4>Research articles</h4></div>
+      {#each articles as article}
+        <a class="article-container" href={getArticleURL(article)} target="_blank">
+          <Icon name="file-text" width={24} height={24} color={color.c3} />
+          <div class="text-content">
+            <div class="heading">
+              {`${article.publicationDate.split("-")[0]} - ${article.journal}`}
+            </div>
+            <div class="article-title">
+              {article.title}
+            </div>
           </div>
-          <div class="article-title">
-            {article.title}
-          </div>
-        </div>
-      </a>
-    {/each}
-  </aside>
+        </a>
+      {/each}
+    </aside>
+  {/if}
 
   <div class="text-container">
     <!-- Intro -->
@@ -79,6 +83,23 @@
         <li class="body-lg">{@html objective}</li>
       {/each}
     </ul>
+
+    <!-- Research Team -->
+    <h3>Research Team</h3>
+    <div>
+      {#each researchTeam as text}
+        <p class="body-rg">{@html text}</p>
+      {/each}
+      <p class="body-rg">
+        <i
+          >Questions about the database or methodology can be directed to <a
+            class="email-link"
+            href="mailto:womensrights.recommendations@gmail.com"
+            ><nobr>womensrights.recommendations@gmail.com</nobr></a
+          ></i
+        >
+      </p>
+    </div>
 
     <!-- Methods -->
     <div class="spacer" />
@@ -121,6 +142,10 @@
 
   .spacer {
     height: 2em;
+  }
+
+  .email-link {
+    text-decoration: underline;
   }
 
   .codebook-container {
@@ -176,6 +201,12 @@
 
     .article-title {
       font-weight: 300;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .text-container {
+      grid-column: 2 / span 10;
     }
   }
 </style>

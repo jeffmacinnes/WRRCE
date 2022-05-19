@@ -1,6 +1,7 @@
 <script>
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
+
   import { onMount, onDestroy } from "svelte";
   import { headerHeight } from "$stores/dataStores";
   import { fade } from "svelte/transition";
@@ -9,9 +10,9 @@
   import ShortLogo from "$assets/WRRCE_shortLogo.svg";
 
   const links = [
-    { title: "Explore", path: "/#explore-anchor" },
-    { title: "About", path: "/about" },
-    { title: "Findings", path: "/findings" }
+    { title: "Explore", path: "/#explore-anchor", activeAt: "/" },
+    { title: "About", path: "/about", activeAt: "/about" },
+    { title: "Findings", path: "/findings", activeAt: "/findings" }
   ];
 
   let showFullLogo = true;
@@ -45,10 +46,8 @@
 
     <div class="links-container">
       {#each links as link}
-        <a
-          class="link"
-          class:active={`${$page.url.pathname}${$page.url.hash}` === link.path}
-          href={link.path}>{link.title}</a
+        <a class="link" class:active={`${$page.url.pathname}` === link.activeAt} href={link.path}
+          >{link.title}</a
         >
       {/each}
     </div>
@@ -120,6 +119,23 @@
       transform: scaleX(1);
       transform-origin: bottom left;
       transition: transform 0.25s ease-out;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .logo-container {
+      transform: scale(0.75);
+      margin: 0;
+    }
+    .nav-container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0px 40px 10px;
+    }
+
+    .link {
+      font-size: 16px;
     }
   }
 </style>

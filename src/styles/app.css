@@ -35,6 +35,7 @@ body {
   letter-spacing: 0.005em;
   color: var(--color-c4);
   box-sizing: content-box;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -134,4 +135,36 @@ p:last-of-type {
   font-size: 12.8px;
   text-transform: uppercase;
   line-height: 133%;
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 40px;
+    line-height: 36px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  h3 {
+    font-size: 26px;
+    line-height: 1.33;
+  }
+
+  .body-lg {
+    font-size: 16px;
+  }
+
+  .body-lg-link {
+    font-size: 16px;
+  }
+
+  .body-rg {
+    font-size: 14px;
+  }
+
+  .body-rg-link {
+    font-size: 14px;
+  }
 }

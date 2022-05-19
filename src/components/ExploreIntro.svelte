@@ -1,6 +1,12 @@
 <script>
+  import mq from "$stores/mq.js";
+
   export let copy;
   let { heading, body } = copy;
+
+  let mobileText =
+    "The Recommendations & Compliance Database Explorer offers custom visualizations and filtering options on a dataset of nearly 4000 recommendations. It is designed to work on screens with a minimum resolution of 1024 pixels wide. Please visit the desktop version of the site to use the Explorer";
+  $: body = $mq.md || $mq.sm ? mobileText : body;
 </script>
 
 <section class="explore-intro-container col-12">
@@ -38,5 +44,11 @@
     width: 10px;
     height: 10px;
     opacity: 0;
+  }
+
+  @media screen and (max-width: 600px) {
+    .text-container {
+      grid-column: 2 / span 10;
+    }
   }
 </style>
