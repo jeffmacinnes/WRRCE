@@ -7,6 +7,7 @@
   import "$styles/app.css";
   import Footer from "$components/Footer.svelte";
   import Navigation from "$components/Navigation.svelte";
+  import GoogleAnalytics from "$components/common/GoogleAnalytics.svelte";
   import PageTransition from "$components/helpers/PageTransition.svelte";
 
   // export let url;
@@ -15,6 +16,7 @@
 </script>
 
 <main id="content" bind:clientWidth={w}>
+  <GoogleAnalytics />
   <Navigation />
   <div class="bg" style:width={`${w}px`} style:height={`${w}px`} />
   <!-- <PageTransition {url}> -->
