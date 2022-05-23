@@ -4,9 +4,12 @@
   export let url = "https://wrrce.org";
   export let keywords = "";
   export let preloadFont = [];
+
+  import GoogleAnalytics from "$components/common/GoogleAnalytics.svelte";
 </script>
 
 <svelte:head>
+  <GoogleAnalytics />
   <title>{title}</title>
   <link rel="icon" href="{url}/assets/favicon.svg" />
   <meta name="description" content={description} />

@@ -7,14 +7,17 @@
   import "$styles/app.css";
   import Footer from "$components/Footer.svelte";
   import Navigation from "$components/Navigation.svelte";
-  import GoogleAnalytics from "$components/common/GoogleAnalytics.svelte";
+  import Meta from "$components/Meta.svelte";
+
   import PageTransition from "$components/helpers/PageTransition.svelte";
 
-  // export let url;
-
+  let description =
+    "Tracking Compliance with Women's Rights Recommendations throughout Europe. New data and analytical tools to help scholars, practitioners and other stakeholders better understand how international human rights recommendations become reality";
+  let url = "https://www.wrrce.org";
   let w;
 </script>
 
+<Meta {url} {description} />
 <main id="content" bind:clientWidth={w}>
   <GoogleAnalytics />
   <Navigation />

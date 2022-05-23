@@ -17,7 +17,6 @@
 </script>
 
 <script>
-  import Meta from "$components/Meta.svelte";
   import Landing from "$components/Landing.svelte";
   import ExploreIntro from "$components/ExploreIntro.svelte";
   import Explore from "$components/Explore.svelte";
@@ -31,12 +30,8 @@
 
   // put the tooltips for the data variables in a store since they'll be accessed multiple places
   variableTooltips.set(tooltips);
-
-  let description =
-    "Tracking Compliance with Women's Rights Recommendations throughout Europe. New data and analytical tools to help scholars, practitioners and other stakeholders better understand how international human rights recommendations become reality";
 </script>
 
-<Meta url="https://www.wrrce.org" {description} />
 <Landing copy={landingCopy} />
 <ExploreIntro copy={exploreCopy} />
 
