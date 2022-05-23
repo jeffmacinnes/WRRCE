@@ -19,9 +19,10 @@ export class Circle {
   }
 
   update() {
-    this.step += 0.003;
+    this.step += 0.002; // <- lower slows animation, higher speeds it up
     let noise = this.p5.noise(this.noiseStart * noiseScale + this.step);
     this.opacity = this.p5.map(noise, 0.25, 0.75, 0, 255);
+    this.tmpR = this.p5.map(noise, 0.25, 0.75, this.size * 0.66, this.size);
 
     if (this.opacity === 0) {
       let tmpColor = colors[Math.floor(Math.random() * colors.length)];
@@ -37,7 +38,7 @@ export class Circle {
 
     this.p5.fill(this.red, this.green, this.blue, this.opacity);
     this.p5.noStroke();
-    this.p5.ellipse(0, 0, this.size, this.size);
+    this.p5.ellipse(0, 0, this.tmpR, this.tmpR);
 
     this.p5.pop();
   }
