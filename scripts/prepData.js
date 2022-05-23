@@ -3,9 +3,9 @@ import csv from "csvtojson";
 import fastcsv from "fast-csv";
 import { titleCase } from "title-case";
 
-const CEDAW_fname = "20220502_CEDAW.csv";
-const ECtHR_fname = "20220502_ECtHR.csv";
-const UPR_fname = "20220502_UPR.csv";
+const CEDAW_fname = "20220522_CEDAW.csv";
+const ECtHR_fname = "20220522_ECtHR.csv";
+const UPR_fname = "20220522_UPR.csv";
 
 const rawDir = "src/data/raw";
 const commonVars = [
@@ -75,7 +75,7 @@ const prepECtHR = async () => {
     ...d,
     id: `ECtHR${String(i).padStart(4, "0")}`,
     institution: "ECtHR",
-    year: d["year(rec)"],
+    year: d["recyear"],
     recSource: `${d["sources"]}, Committee of Ministers meeting #${d["COMmeetingnumber_rec"]}`
   })); // <- rename year var as well
 
