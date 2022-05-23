@@ -19,7 +19,6 @@
 
 <Meta {url} {description} />
 <main id="content" bind:clientWidth={w}>
-  <GoogleAnalytics />
   <Navigation />
   <div class="bg" style:width={`${w}px`} style:height={`${w}px`} />
   <!-- <PageTransition {url}> -->
